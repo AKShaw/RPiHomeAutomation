@@ -13,7 +13,7 @@ elif (platform.system() == "Linux"):
         print("Running on Linux...")
         @route("/static/<filepath:path>")
         def server_static(filepath):
-                return static_file(filepath, root='~/RPiHomeAutomation/www')
+                return static_file(filepath, root='/home/alex/RPiHomeAutomation/www')
         print("Static path set!")
 else:
         print("Operating system not supported for development! Please use Windows or Linux")
