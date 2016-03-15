@@ -35,8 +35,7 @@
 		%else:
 		<div flex>Home - Control Panel</div>
 		%end
-      </paper-toolbar>
-      <div>
+      </paper-toolbar
         <div class="col-xs-12 col-md-4"><div id="card">{{area}}</div></div>
       </div>
     </paper-header-panel>
