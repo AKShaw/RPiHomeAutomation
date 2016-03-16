@@ -33,7 +33,7 @@ else:
 def index(area="Home"):
         return template("www/index.tpl", area=area)
 
-run(host='localhost', port=8080)
+run(host='0.0.0.0', port=80)
 
 
 #TODO: generate body content dependent on area etc
