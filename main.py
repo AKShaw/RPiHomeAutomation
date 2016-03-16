@@ -16,8 +16,16 @@ elif (platform.system() == "Linux"):
                 return static_file(filepath, root='/home/alex/RPiHomeAutomation/www')
         print("Static path set!")
 else:
-        print("Operating system not supported for development! Please use Windows or Linux")
-        sys.exit()
+	try:
+		import RPi.GPIO as GPIO
+	except ImportError:	
+        	print("Operating system not supported for development! Please use Windows or Linux")
+        	sys.exit()
+	print("Running on Raspberry Pi...")
+        @route("/static/<filepath:path>")
+        def server_static(filepath):
+                return static_file(filepath, root='/home/pi/RPiHomeAutomation/www')
+        print("Static path set!")
 
 @route('/<area>')
 @route('/')
