@@ -36,8 +36,8 @@
 		<div flex>Home - Control Panel</div>
 		%end
       </paper-toolbar>
-	  <div>
-        <div class="col-xs-12 col-md-4"><div id="card">{{area}}</div></div>
+      <div>
+        %include("www/test.tpl")
       </div>
     </paper-header-panel>
     
