@@ -85,4 +85,6 @@ def start():
 
 start()
 
-#TODO: Update weather every 10 minutes
+#TODO: Update weather on page load by changing "weather=weatherData" to "weather=getWeatherData()*". This will
+#	also require removing "global weatherData" etc.
+#*	getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong))
