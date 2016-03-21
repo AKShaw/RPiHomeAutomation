@@ -45,7 +45,7 @@ else:
 @route('/<area>')
 @route('/')
 def index(area="Home"):
-    return template("www/index.tpl", area=area, weather=weatherData)
+    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)))
 
 def getWeatherData(owm, lat, long):
     owm = owm
@@ -57,15 +57,24 @@ def getWeatherData(owm, lat, long):
     location = weather.get_location().get_name() #get location name e.g Salisbury
     weather = weather.get_weather() #returns weather obj
     temp = weather.get_temperature(unit="celsius") #returns temp obj
+    icon = weather.get_weather_icon_name()
     minTemp = temp["temp_min"]
     maxTemp = temp["temp_max"]
     currentTemp = temp["temp"]
     temp = [currentTemp, minTemp, maxTemp]
-    humidity = weather.get_humidity()
-    windSpeed = weather.get_wind()["speed"]
-    status = weather.get_status()
-    rain=weather.get_rain()
+    humidity = weather.get_humidity()   #Gets humidity
+    windSpeed = weather.get_wind()["speed"] #gets wind speed m/s
+    status = weather.get_status() #gets quick weather status
+    sunTime = [weather.get_sunrise_time(), weather.get_sunset_time()]
 
+    #Select background colors:
+    if (time.time() < sunTime[0] or time.time() > sunTime[1]):
+        color = ["1A237E", "212121"]    #night
+    elif (time.time() > suntime[0] and time.time() < sunTime[1]):
+        color = ["B3E5FC", "29B6F6"]  #day
+    else:
+        color = ["FFFFFF", "FFFFFF"]    #blank
+    
     weather = {}
     weather["date"] = currentDate
     weather["location"] = location
@@ -73,18 +82,17 @@ def getWeatherData(owm, lat, long):
     weather["humidity"] = humidity
     weather["windSpeed"] = windSpeed
     weather["status"] = status
+    weather["icon"] = icon
+    weather["color"] = color
    
     return weather
 
 
 def start():
-    owm = pyowm.OWM("18c319fbdc2695c31d05763b053e1753")
-    global weatherData
-    weatherData = getWeatherData(owm, float(config.getLat), float(config.getLong))
     run(host='0.0.0.0', port=8080)
 
 start()
 
 #TODO: Update weather on page load by changing "weather=weatherData" to "weather=getWeatherData()*". This will
 #	also require removing "global weatherData" etc.
-#*	getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong))
+#*	
