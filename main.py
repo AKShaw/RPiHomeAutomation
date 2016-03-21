@@ -1,9 +1,14 @@
+#DEPENDENCIES:
+#   bottle
+#   pyowm
+
 from bottle import *
 from config import GetConfig
+from datetime import date
 import platform
 import sys
-import json
-import urllib.request
+import calendar
+import pyowm
 
 
 #Initilize config class
@@ -40,22 +45,44 @@ else:
 @route('/<area>')
 @route('/')
 def index(area="Home"):
-    return template("www/index.tpl", area=area, nums=[0,1,2,3])
+    return template("www/index.tpl", area=area, weather=weatherData)
 
-def createWeatherJson(lat, long):
-    url="http://api.openweathermap.org/data/2.5/weather?lat="+str(lat)+"&lon="+str(long)+"&APPID=18c319fbdc2695c31d05763b053e1753"
-    print("Getting weather data...")
-    response = urllib.request.urlopen(url)
-    print("Data collected, parsing to JSON...")
-    data = json.loads(response.read())
-    print("Parsing complete!")
-    return data
+def getWeatherData(owm, lat, long):
+    owm = owm
+    weather = owm.weather_at_coords(lat, long) #returns observation obj
+    currentDate = date.today()
+    date_day_name = calendar.day_name[date.today().weekday()] #get day name
+    date_day_num = date.today().day # get day num
+    currentDate = [date_day_name, date_day_num] #create date variable
+    location = weather.get_location().get_name() #get location name e.g Salisbury
+    weather = weather.get_weather() #returns weather obj
+    temp = weather.get_temperature(unit="celsius") #returns temp obj
+    minTemp = temp["temp_min"]
+    maxTemp = temp["temp_max"]
+    currentTemp = temp["temp"]
+    temp = [currentTemp, minTemp, maxTemp]
+    humidity = weather.get_humidity()
+    windSpeed = weather.get_wind()["speed"]
+    status = weather.get_status()
+    rain=weather.get_rain()
+
+    weather = {}
+    weather["date"] = currentDate
+    weather["location"] = location
+    weather["temps"] = temp
+    weather["humidity"] = humidity
+    weather["windSpeed"] = windSpeed
+    weather["status"] = status
+   
+    return weather
+
 
 def start():
-    weatherData = createWeatherJson(config.getLat, config.getLong)
-    print (weatherData)
+    owm = pyowm.OWM("18c319fbdc2695c31d05763b053e1753")
+    global weatherData
+    weatherData = getWeatherData(owm, float(config.getLat), float(config.getLong))
     run(host='0.0.0.0', port=8080)
 
 start()
 
-#TODO: Fix invalid API call error (even though key is correct?)
+#TODO: Update weather every 10 minutes
