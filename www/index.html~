@@ -60,7 +60,7 @@
       <a class="blank" href="#about"><paper-item><iron-icon class="padRight" icon="help-outline"></iron-icon>About</paper-item</a>
     </paper-header-panel>
   
-  </paper-drawer-panel>
+  </paper-drawer-panel>
 </body>
 </html>
 
