@@ -37,7 +37,19 @@
 		%end
       </paper-toolbar>
       <div>
-        %include("www/home.tpl")
+		%if area=="Home" or area=="":
+		%	include("www/tpl/Home.tpl")
+		%elif area=="Sensors":
+		%	include("www/tpl/Sensors.tpl")
+		%elif area=="Lighting":
+		%	include("www/tpl/Lighting.tpl")
+		%elif area=="Temperature":
+		%	include("www/tpl/Temperature.tpl")
+		%elif area=="Config":
+		%	include("www/tpl/Config.tpl")
+		%elif area=="About":
+		%	include("www/tpl/About.tpl")
+		%end
       </div>
     </paper-header-panel>
     
@@ -52,6 +64,7 @@
       <a class="blank" href="Temperature"><paper-item><iron-icon class="padRight" icon="places:ac-unit"></iron-icon>Temperature</paper-item></a>
       <a class="blank" href="Music"><paper-item><iron-icon class="padRight" icon="av:library-music"></iron-icon>Music</paper-item></a>
       <hr width="100%">
+	  <a class="blank" href="Config"><paper-item><iron-icon class="padRight" icon="build"></iron-icon>Configuration</paper-item</a>
       <a class="blank" href="About"><paper-item><iron-icon class="padRight" icon="help-outline"></iron-icon>About</paper-item</a>
     </paper-header-panel>
   
