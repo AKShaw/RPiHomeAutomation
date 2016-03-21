@@ -38,4 +38,9 @@ iron-icon.padRight{
   margin-top:3%;
   margin-left:1%;
   padding:3%;
+  overflow:overlay;
+}
+
+h2.title, h1.title{
+	margin-top:5px;
 }

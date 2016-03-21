@@ -1,2 +1,4 @@
-<div class="col-xs-12 col-md-4"><div id="card">{{weather}}</div></div>
+<div class="col-xs-12 col-md-6">
+	%include("www/weather.tpl")
+</div>
 
