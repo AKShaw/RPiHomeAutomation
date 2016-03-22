@@ -82,6 +82,7 @@ def writeConfig():
 def setLEDScreen():
     firstLine = request.forms.get("line1")
     secondLine = request.forms.get("line2")
+    global led
     led = SetLED(firstLine, secondLine, board)
     redirect("/LEDScreen")
 
