@@ -13,6 +13,7 @@ import calendar
 import pyowm
 
 board = Board()
+led = SetLED("", "", board)
 
 
 #Initilize config class
@@ -138,7 +139,6 @@ def getWeatherData(owm, lat, long):
 
 def start():
     setConfig()
-    led = SetLED("", "", board)
     run(host='0.0.0.0', port=8080)
 
 start()
