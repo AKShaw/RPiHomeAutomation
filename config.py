@@ -15,6 +15,7 @@ class GetConfig():
         lat = s1[s1.index("lat=") + len("lat="):]
         s2 = lines[1]
         long = s2[s2.index("long=") + len("long="):]
+        lat = lat[0:len(lat)-2] #cut \n off
         return lat, long
         
     @property
@@ -24,5 +25,21 @@ class GetConfig():
     @property
     def getLong(self):
         return self.long
+
+class SaveConfig():
+    def __init__(self, lat, long):
+        self.createData(lat, long)
+
+    def writeConfigFile(self, data):
+        f = open("config", "w")
+        f.write(data)
+        f.close()
+
+    def createData(self, lat, long):
+        data = "lat="+str(lat)+"\nlong="+str(long)
+        self.writeConfigFile(data)
+        
+
+    
 	
 		

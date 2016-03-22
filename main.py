@@ -3,7 +3,7 @@
 #   pyowm
 
 from bottle import *
-from config import GetConfig
+from config import *
 from datetime import date
 import platform
 import sys
@@ -12,7 +12,9 @@ import pyowm
 
 
 #Initilize config class
-config = GetConfig()
+def setConfig():
+    global config
+    config = GetConfig()
 
 #Set static path for files
 if (platform.system() == "Windows"):
@@ -45,7 +47,35 @@ else:
 @route('/<area>')
 @route('/')
 def index(area="Home"):
-    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)))
+    configObj = {}
+    configObj["lat"] = config.getLat
+    configObj["long"] = config.getLong
+    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj)
+
+@route("/saveConfig", method="POST")
+def writeConfig():
+    lat=request.forms.get("lat")
+    long=request.forms.get("long")
+    valid = checkLatLong(lat, long)
+    if valid==True:
+        print("Saving...")
+        saveConfig = SaveConfig(lat, long)
+        print("Saved!")
+        setConfig()
+        redirect("/Config")
+    elif valid==False:
+        return "<p>Latitude or Longtitude invalid!</p>"
+
+
+def checkLatLong(lat, long):
+    try:
+        if (-90 <= float(lat) <= 90 and -180 <= float(long) <= 180):
+            return True
+        else:
+            return False
+    except ValueError:
+        return False
+    
 
 def getWeatherData(owm, lat, long):
     owm = owm
@@ -89,6 +119,7 @@ def getWeatherData(owm, lat, long):
 
 
 def start():
+    setConfig()
     run(host='0.0.0.0', port=8080)
 
 start()
