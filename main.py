@@ -61,7 +61,7 @@ def index(area="Home"):
     ledScreenObj = {}
     ledScreenObj["firstLine"] = led.getLine1
     ledScreenObj["secondLine"] = led.getLine2
-    
+
     print(ledScreenObj)
     
     return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, led=ledScreenObj)
@@ -80,7 +80,7 @@ def writeConfig():
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
 
-@route("/setLEDScreen")
+@route("/setLEDScreen", method="POST")
 def setLEDScreen():
     firstLine = request.forms.get("line1")
     secondLine = request.forms.get("line2")
