@@ -59,7 +59,7 @@ def index(area="Home"):
     configObj["long"] = config.getLong
 
     ledScreenObj = {}
-    ledSreenObj["firstLine"] = led.getLine1
+    ledScreenObj["firstLine"] = led.getLine1
     ledScreenObj["secondLine"] = led.getLine2
     
     return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj)
