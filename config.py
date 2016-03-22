@@ -15,7 +15,7 @@ class GetConfig():
         lat = s1[s1.index("lat=") + len("lat="):]
         s2 = lines[1]
         long = s2[s2.index("long=") + len("long="):]
-        lat = lat[0:len(lat)-2] #cut \n off
+        #lat = lat[0:len(lat)-2] #cut \n off
         return lat, long
         
     @property
