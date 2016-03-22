@@ -4,17 +4,23 @@
 
 from bottle import *
 from config import *
+from board import Board
+from led import SetLED
 from datetime import date
 import platform
 import sys
 import calendar
 import pyowm
 
+board = Board()
+
 
 #Initilize config class
 def setConfig():
     global config
     config = GetConfig()
+
+
 
 #Set static path for files
 if (platform.system() == "Windows"):
@@ -50,6 +56,11 @@ def index(area="Home"):
     configObj = {}
     configObj["lat"] = config.getLat
     configObj["long"] = config.getLong
+
+    ledScreenObj = {}
+    ledSreenObj["firstLine"] = led.getLine1
+    ledScreenObj["secondLine"] = led.getLine2
+    
     return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj)
 
 @route("/saveConfig", method="POST")
@@ -65,6 +76,13 @@ def writeConfig():
         redirect("/Config")
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
+
+@route("/setLEDScreen")
+def setLEDScreen():
+    firstLine = request.forms.get("line1")
+    secondLine = request.forms.get("line2")
+    led = SetLED(firstLine, secondLine, board)
+    redirect("/LEDScreen")
 
 
 def checkLatLong(lat, long):
@@ -120,6 +138,10 @@ def getWeatherData(owm, lat, long):
 
 def start():
     setConfig()
+    led = SetLED("", "", board)
     run(host='0.0.0.0', port=8080)
 
 start()
+
+#TODO: write gpio class that sets up the board, pins etc
+#   Finish setLED method
