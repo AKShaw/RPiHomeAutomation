@@ -42,8 +42,6 @@
       <div>
 		%if area=="Home" or area=="":
 		%	include("www/tpl/Home.tpl")
-		%elif area=="Sensors":
-		%	include("www/tpl/Sensors.tpl")
 		%elif area=="Lighting":
 		%	include("www/tpl/Lighting.tpl")
 		%elif area=="Temperature":
@@ -65,7 +63,6 @@
         <div flex>Navigation</div>
       </paper-toolbar>
       <a class="blank" href="Home"><paper-item><iron-icon class="padRight" icon="home"></iron-icon>Home</paper-item></a>
-      <a class="blank" href="Sensors"><paper-item><iron-icon class="padRight" icon="hardware:developer-board"></iron-icon>Sensors</paper-item></a>
       <hr width="100%">
       <a class="blank" href="Lighting"><paper-item><iron-icon class="padRight" icon="lightbulb-outline"></iron-icon>Lighting</paper-item></a>
       <a class="blank" href="Temperature"><paper-item><iron-icon class="padRight" icon="places:ac-unit"></iron-icon>Temperature</paper-item></a>

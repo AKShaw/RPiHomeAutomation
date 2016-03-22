@@ -41,6 +41,13 @@ iron-icon.padRight{
   overflow:overlay;
 }
 
+#miniCard{
+  border-style:solid;
+  border-width:1px;
+  border-color:#9E9E9E;
+  margin-bottom:1em;
+}
+
 h2.title, h1.title{
 	margin-top:5px;
 }
@@ -54,4 +61,19 @@ paper-button#submit:not([disabled]){
 
 #drawer{
 	background-color:#F5F5F5;
+}
+
+.ledScreen{
+	background: radial-gradient(ellipse at center, rgba(98,125,77,1) 0%, rgba(31,59,8,1) 100%);
+	color:#FFFFFF;
+}
+
+h3#led{
+	padding:5px;
+	background-color:rgba(156,204,101,0.25);
+	font-family:monospace;
+}
+
+#center{
+	text-align:center;
 }

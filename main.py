@@ -4,7 +4,7 @@
 
 from bottle import *
 from config import *
-from board import Board
+#from board import Board
 from led import SetLED
 from datetime import date
 import platform
@@ -12,7 +12,8 @@ import sys
 import calendar
 import pyowm
 
-board = Board()
+#board = Board()
+board=""
 led = SetLED("", "", board)
 
 
@@ -61,8 +62,6 @@ def index(area="Home"):
     ledScreenObj = {}
     ledScreenObj["firstLine"] = led.getLine1
     ledScreenObj["secondLine"] = led.getLine2
-
-    print(ledScreenObj)
     
     return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, led=ledScreenObj)
 

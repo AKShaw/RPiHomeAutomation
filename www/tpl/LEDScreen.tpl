@@ -4,8 +4,8 @@
 	<h2 class="title">LED Screen</h2>
 	<form is="iron-form" action="/setLEDScreen" method="POST">
 		<h4>Display settings:</h4>
-		<div><paper-input name="line1" label="First line" value="{{led["firstLine"]}}" char-counter maxLength="16" required></paper-input></div>
-		<div><paper-input name="line2" label="Second line" value="{{led["secondLine"]}}" char-counter maxLength="16" required></paper-input></div>
+		<div><paper-input name="line1" label="First line" value="{{led["firstLine"]}}" char-counter maxLength="16"></paper-input></div>
+		<div><paper-input name="line2" label="Second line" value="{{led["secondLine"]}}" char-counter maxLength="16"></paper-input></div>
 		<paper-button class="col-xs-12" raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); saveToast.open()">Set LED screen!</paper-button>
 		<paper-toast id="saveToast" text="Screen set!"></paper-toast>
 	</form>
