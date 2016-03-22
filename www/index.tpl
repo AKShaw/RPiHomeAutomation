@@ -21,6 +21,9 @@
   <link rel="import" href="/static/bower_components/paper-drawer-panel/paper-drawer-panel.html">
   <link rel="import" href="/static/bower_components/paper-header-panel/paper-header-panel.html">
   <link rel="import" href="/static/bower_components/paper-item/paper-item.html">
+  <link rel="import" href="/static/bower_components/iron-form/iron-form.html">
+  <link rel="import" href="/static/bower_components/paper-input/paper-input.html">
+  <link rel="import" href="/static/bower_components/paper-toast/paper-toast.html">
   <link rel="stylesheet" href="/static/styles.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -45,6 +48,10 @@
 		%	include("www/tpl/Lighting.tpl")
 		%elif area=="Temperature":
 		%	include("www/tpl/Temperature.tpl")
+		%elif area=="Windows":
+		%	include("www/tpl/Windows.tpl")
+		%elif area=="LEDScreen":
+		%	include("www/tpl/LEDScreen.tpl")
 		%elif area=="Config":
 		%	include("www/tpl/Config.tpl")
 		%elif area=="About":
@@ -53,7 +60,7 @@
       </div>
     </paper-header-panel>
     
-    <paper-header-panel drawer>
+    <paper-header-panel drawer id="drawer">
       <paper-toolbar class="drawer">
         <div flex>Navigation</div>
       </paper-toolbar>
@@ -62,7 +69,8 @@
       <hr width="100%">
       <a class="blank" href="Lighting"><paper-item><iron-icon class="padRight" icon="lightbulb-outline"></iron-icon>Lighting</paper-item></a>
       <a class="blank" href="Temperature"><paper-item><iron-icon class="padRight" icon="places:ac-unit"></iron-icon>Temperature</paper-item></a>
-      <a class="blank" href="Music"><paper-item><iron-icon class="padRight" icon="av:library-music"></iron-icon>Music</paper-item></a>
+      <a class="blank" href="Windows"><paper-item><iron-icon class="padRight" icon="cloud"></iron-icon>Windows</paper-item></a>
+      <a class="blank" href="LEDScreen"><paper-item><iron-icon class="padRight" icon="check-box-outline-blank"></iron-icon>LED Screen</paper-item></a>
       <hr width="100%">
 	  <a class="blank" href="Config"><paper-item><iron-icon class="padRight" icon="build"></iron-icon>Configuration</paper-item</a>
       <a class="blank" href="About"><paper-item><iron-icon class="padRight" icon="help-outline"></iron-icon>About</paper-item</a>

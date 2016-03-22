@@ -98,9 +98,9 @@ def getWeatherData(owm, lat, long):
     sunTime = [weather.get_sunrise_time(), weather.get_sunset_time()]
 
     #Select background colors:
-    if (time.time() < sunTime[0] or time.time() > sunTime[1]):
+    if (time.time() <= sunTime[0] or time.time() > sunTime[1]):
         color = ["1A237E", "212121"]    #night
-    elif (time.time() > suntime[0] and time.time() < sunTime[1]):
+    elif (time.time() > sunTime[0] and time.time() <= sunTime[1]):
         color = ["B3E5FC", "29B6F6"]  #day
     else:
         color = ["FFFFFF", "FFFFFF"]    #blank
@@ -123,7 +123,3 @@ def start():
     run(host='0.0.0.0', port=8080)
 
 start()
-
-#TODO: Update weather on page load by changing "weather=weatherData" to "weather=getWeatherData()*". This will
-#	also require removing "global weatherData" etc.
-#*	
