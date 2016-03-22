@@ -59,8 +59,8 @@ def index(area="Home"):
     configObj["long"] = config.getLong
 
     ledScreenObj = {}
-    ledScreenObj["firstLine"] = led.getLine1()
-    ledScreenObj["secondLine"] = led.getLine2()
+    ledScreenObj["firstLine"] = led.getLine1
+    ledScreenObj["secondLine"] = led.getLine2
     
     print(ledScreenObj)
     
