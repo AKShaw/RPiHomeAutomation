@@ -13,10 +13,7 @@ import calendar
 import pyowm
 
 board = Board()
-
-def loadLEDScreen(l1, l2, board):
-    global led
-    led = SetLED(l1, l2, board)
+led = SetLED("", "", board)
 
 
 #Initilize config class
@@ -87,7 +84,8 @@ def writeConfig():
 def setLEDScreen():
     firstLine = request.forms.get("line1")
     secondLine = request.forms.get("line2")
-    loadLEDScreen(firstLine, secondLine, board)
+    led.setLine1(firstLine)
+    led.setLine2(secondLine)
     redirect("/LEDScreen")
 
 
@@ -144,7 +142,6 @@ def getWeatherData(owm, lat, long):
 
 def start():
     setConfig()
-    loadLEDScreen("", "", board)
     run(host='0.0.0.0', port=8080)
 
 start()
