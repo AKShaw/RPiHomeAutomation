@@ -63,6 +63,8 @@ def index(area="Home"):
     ledScreenObj["firstLine"] = led.getLine1()
     ledScreenObj["secondLine"] = led.getLine2()
     
+    print(ledScreenObj)
+    
     return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, led=ledScreenObj)
 
 @route("/saveConfig", method="POST")
