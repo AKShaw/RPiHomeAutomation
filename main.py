@@ -146,5 +146,4 @@ def start():
 
 start()
 
-#TODO: write gpio class that sets up the board, pins etc
-#   Finish setLED method
+#TODO: Create LED module for home page that displays current text, actually set an LED via GPIO
