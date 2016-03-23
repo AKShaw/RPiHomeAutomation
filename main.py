@@ -4,17 +4,22 @@
 
 from bottle import *
 from config import *
+#from sense_hat import SenseHat
 #from board import Board
 from led import SetLED
+from thermostat import Thermostat
 from datetime import date
 import platform
 import sys
 import calendar
 import pyowm
+import time
 
 #board = Board()
+#sense = SenseHat()
 board=""
 led = SetLED("", "", board)
+therm = Thermostat(20, 0, "OFF")
 
 
 #Initilize config class
@@ -59,11 +64,17 @@ def index(area="Home"):
     configObj["lat"] = config.getLat
     configObj["long"] = config.getLong
 
+    updateRoomTemp()
+    tempObj = {}
+    tempObj["target"]= therm.getTarget
+    tempObj["room"] = therm.getRoomTemp
+    tempObj["heating"] = therm.getHeatingStatus
+
     ledScreenObj = {}
     ledScreenObj["firstLine"] = led.getLine1
     ledScreenObj["secondLine"] = led.getLine2
     
-    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, led=ledScreenObj)
+    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, led=ledScreenObj, temp=tempObj)
 
 @route("/saveConfig", method="POST")
 def writeConfig():
@@ -87,6 +98,12 @@ def setLEDScreen():
     led.setLine2(secondLine)
     redirect("/LEDScreen")
 
+@route("/setTargetTemp", method="POST")
+def setTargetTemp():
+    target = request.forms.get("targetSlider")
+    therm.setTarget(float(target))
+    
+    #redirect("/Temperature")
 
 def checkLatLong(lat, long):
     try:
@@ -138,11 +155,18 @@ def getWeatherData(owm, lat, long):
    
     return weather
 
+def getCurrentTemp():
+    return 18.9
+    #return sense.temp
+
+def updateRoomTemp():
+    therm.setRoomTemp(getCurrentTemp())
 
 def start():
     setConfig()
+    updateRoomTemp()
     run(host='0.0.0.0', port=8080)
 
 start()
 
-#TODO: Create LED module for home page that displays current text, actually set an LED via GPIO
+#TODO: FIX LAG ON THERMOSTAT TARGET TEMP
