@@ -6,7 +6,7 @@ from bottle import *
 from config import *
 #from sense_hat import SenseHat
 #from board import Board
-from led import SetLED
+from lcd import SetLCD
 from thermostat import Thermostat
 from datetime import date
 import platform
@@ -18,7 +18,7 @@ import time
 #board = Board()
 #sense = SenseHat()
 board=""
-led = SetLED("", "", board)
+lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, "OFF")
 
 
@@ -70,11 +70,11 @@ def index(area="Home"):
     tempObj["room"] = therm.getRoomTemp
     tempObj["heating"] = therm.getHeatingStatus
 
-    ledScreenObj = {}
-    ledScreenObj["firstLine"] = led.getLine1
-    ledScreenObj["secondLine"] = led.getLine2
+    lcdScreenObj = {}
+    lcdScreenObj["firstLine"] = lcd.getLine1
+    lcdScreenObj["secondLine"] = lcd.getLine2
     
-    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, led=ledScreenObj, temp=tempObj)
+    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
 
 @route("/saveConfig", method="POST")
 def writeConfig():
@@ -90,13 +90,13 @@ def writeConfig():
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
 
-@route("/setLEDScreen", method="POST")
-def setLEDScreen():
+@route("/setLCDScreen", method="POST")
+def setLCDScreen():
     firstLine = request.forms.get("line1")
     secondLine = request.forms.get("line2")
-    led.setLine1(firstLine)
-    led.setLine2(secondLine)
-    redirect("/LEDScreen")
+    lcd.setLine1(firstLine)
+    lcd.setLine2(secondLine)
+    redirect("/LCDScreen")
 
 @route("/setTargetTemp", method="POST")
 def setTargetTemp():

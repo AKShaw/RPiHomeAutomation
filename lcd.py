@@ -1,6 +1,6 @@
 #from lcd1602 import LCD1602
 
-class SetLED():
+class SetLCD():
     def __init__(self, line1, line2, board):
         self.line1 = line1
         self.line2 = line2
