@@ -12,7 +12,7 @@ class SetLCD():
         return self.line1
 
     def setLine1(self, value):
-        #lcd.lcd_string(value, lcd.LCD_LINE_1)
+        #self.lcd.lcd_string(value, self.lcd.LCD_LINE_1)
         self.line1 = value
 
     @property
@@ -20,5 +20,5 @@ class SetLCD():
         return self.line2
 
     def setLine2(self, value):
-        #lcd.lcd_string(value, lcd.LCD_LINE_2)
+        #self.lcd.lcd_string(value, self.lcd.LCD_LINE_2)
         self.line2 = value
