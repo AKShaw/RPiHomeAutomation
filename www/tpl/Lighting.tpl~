@@ -15,9 +15,6 @@
 	    --paper-slider-knob-color: var(--paper-light-blue-500);
 	    --paper-slider-active-color: var(--paper-light-blue-500);
 	  }
-       	  paper-slider {
-            width: 100%;
-          }
 	</style>
 	<form is="iron-form" action="/setLEDs" method="POST">
 		<h4>RGB settings:</h4>

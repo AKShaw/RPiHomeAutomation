@@ -73,8 +73,14 @@ def index(area="Home"):
     lcdScreenObj = {}
     lcdScreenObj["firstLine"] = lcd.getLine1
     lcdScreenObj["secondLine"] = lcd.getLine2
-    
-    return template("www/index.tpl", area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
+
+    rgbObj = {}
+    rgbObj["red"]=50
+    rgbObj["green"]=50
+    rgbObj["blue"]=50
+    rgbObj["status"]=1
+
+    return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
 
 @route("/saveConfig", method="POST")
 def writeConfig():
@@ -169,4 +175,4 @@ def start():
 
 start()
 
-#TODO: FIX LAG ON THERMOSTAT TARGET TEMP
+#TODO: Write LED class, add setLEDs method into here that gets data and sets lights etc
