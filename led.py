@@ -17,7 +17,7 @@ class RGBLED():
         return self.Blue
 
     def setBlue(self, value):
-        self.Blue = value
+        self.blue = value
 
     @property
     def getGreen(self):
