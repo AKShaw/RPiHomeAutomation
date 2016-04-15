@@ -7,6 +7,7 @@ from config import *
 #from sense_hat import SenseHat
 #from board import Board
 from lcd import SetLCD
+from led import RGBLED
 from thermostat import Thermostat
 from datetime import date
 import platform
@@ -20,6 +21,7 @@ import time
 board=""
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, "OFF")
+rgbled = RGBLED(50, 50, 50, 1)
 
 
 #Initilize config class
@@ -75,10 +77,10 @@ def index(area="Home"):
     lcdScreenObj["secondLine"] = lcd.getLine2
 
     rgbObj = {}
-    rgbObj["red"]=50
-    rgbObj["green"]=50
-    rgbObj["blue"]=50
-    rgbObj["status"]=1
+    rgbObj["red"]=rgbled.getRed
+    rgbObj["green"]=rgbled.getGreen
+    rgbObj["blue"]=rgbled.getBlue
+    rgbObj["status"]=rgbled.getStatus
 
     return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
 
@@ -110,6 +112,18 @@ def setTargetTemp():
     therm.setTarget(float(target))
     
     #redirect("/Temperature")
+
+@route("/setLEDs", method="POST")
+def setLEDs():
+    red = request.forms.get("redSlider")
+    green = request.forms.get("greenSlider")
+    blue = request.forms.get("blueSlider")
+    status = request.forms.get("onOff")
+    rgbled.setRed(float(red))
+    rgbled.setGreen(float(green))
+    rgbled.setBlue(float(blue))
+    rgbled.setStatus(float(status))
+    redirect("/Lighting")
 
 def checkLatLong(lat, long):
     try:
