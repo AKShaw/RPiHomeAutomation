@@ -1,4 +1,4 @@
-class LED():
+class RGBLED():
     def __init__(self, red, green, blue, status):
         self.red = red
         self.green = green
