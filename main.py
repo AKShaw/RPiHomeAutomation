@@ -21,7 +21,7 @@ import time
 board=""
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, "OFF")
-rgbled = RGBLED(50, 50, 50, 1)
+rgbled = RGBLED(128, 128, 128, 1)
 
 
 #Initilize config class
@@ -119,10 +119,10 @@ def setLEDs():
     green = request.forms.get("greenSlider")
     blue = request.forms.get("blueSlider")
     status = request.forms.get("onOff")
-    rgbled.setRed(float(red))
-    rgbled.setGreen(float(green))
-    rgbled.setBlue(float(blue))
-    rgbled.setStatus(float(status))
+    rgbled.setRed(red)
+    rgbled.setGreen(green)
+    rgbled.setBlue(blue)
+    rgbled.setStatus(status)
     redirect("/Lighting")
 
 def checkLatLong(lat, long):

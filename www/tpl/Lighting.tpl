@@ -21,14 +21,14 @@
 	</style>
 	<form is="iron-form" action="/setLEDs" method="POST">
 		<h4>RGB settings:</h4>
-		R<paper-slider class="red" name="redSlider" pin min="0" max="100" value="{{rgb["red"]}}" editable></paper-slider>
-		G<paper-slider class="green" name="greenSlider" pin min="0" max="100" value="{{rgb["green"]}}" editable></paper-slider>
-		B<paper-slider class="blue" name="blueSlider" pin min="0" max="100" value="{{rgb["blue"]}}" editable></paper-slider>
+		R<paper-slider class="red" name="redSlider" pin min="0" max="255" value="{{rgb["red"]}}" editable></paper-slider>
+		G<paper-slider class="green" name="greenSlider" pin min="0" max="255" value="{{rgb["green"]}}" editable></paper-slider>
+		B<paper-slider class="blue" name="blueSlider" pin min="0" max="255" value="{{rgb["blue"]}}" editable></paper-slider>
 		<h4>Off/On:</h4>
 		<paper-slider name="onOff" pin min="0" max="1" value="{{rgb["status"]}}"></paper-slider>
 		<paper-button raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); setToast.open();">Set RGB!</paper-button>
 	</form>
-	<paper-toast id="set" text="Set lighting settings!"></paper-toast>
+	<paper-toast id="setToast" text="Set lighting settings!"></paper-toast>
 </div>
 <div class="col-xs-0 col-md-3">
 </div>
