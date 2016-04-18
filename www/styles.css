@@ -77,3 +77,7 @@ h3#lcd{
 #center{
 	text-align:center;
 }
+
+.cardHeight{
+	height:500px;
+}
