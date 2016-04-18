@@ -121,7 +121,7 @@ def setLEDs():
     rgbled.setGreen(green)
     rgbled.setBlue(blue)
     rgbled.setStatus(status)
-    rgbled.updateLight(red, green, blue)
+    rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
 
 def checkLatLong(lat, long):
