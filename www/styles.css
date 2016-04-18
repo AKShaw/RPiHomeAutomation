@@ -39,6 +39,9 @@ iron-icon.padRight{
   margin-left:1%;
   padding:3%;
   overflow:overlay;
+}
+
+#bodyCard{
   overflow-x:hidden;
   overflow-y:hidden;
   height:19em;

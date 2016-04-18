@@ -1,4 +1,4 @@
-<div id="card bodyCard" style="background: linear-gradient(#{{weather["color"][0]}}, #{{weather["color"][1]}}); color:#fff;">
+<div id="card" style="background: linear-gradient(#{{weather["color"][0]}}, #{{weather["color"][1]}}); color:#fff;">
 	<div>
 	<div class="col-xs-6">
 		<h5>Location information:</h5>
