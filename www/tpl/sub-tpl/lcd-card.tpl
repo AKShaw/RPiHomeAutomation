@@ -1,4 +1,4 @@
-<div id="card bodyCard" class="lcdScreen">
+<div id="bodyCard" class="lcdScreen">
 <h2 class="title">LCD Display:</h2>
 %if lcd["firstLine"] != "":
 <h3 id="lcd">{{lcd["firstLine"]}}</h3>
