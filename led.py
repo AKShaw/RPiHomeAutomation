@@ -1,9 +1,10 @@
 class RGBLED():
-    def __init__(self, red, green, blue, status):
+    def __init__(self, red, green, blue, status, sense):
         self.red = red
         self.green = green
         self.blue = blue
         self.status = status
+        self.sense = sense
 
     @property
     def getRed(self):
@@ -32,3 +33,6 @@ class RGBLED():
 
     def setStatus(self, value):
         self.status = value
+
+    def updateLight(self, red, green, blue):
+        self.sense.set_pixels([red, green, blue]*64)

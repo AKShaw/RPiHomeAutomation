@@ -4,8 +4,8 @@
 
 from bottle import *
 from config import *
-#from sense_hat import SenseHat
-#from board import Board
+from sense_hat import SenseHat
+from board import Board
 from lcd import SetLCD
 from led import RGBLED
 from thermostat import Thermostat
@@ -16,12 +16,11 @@ import calendar
 import pyowm
 import time
 
-#board = Board()
-#sense = SenseHat()
-board=""
+board = Board()
+sense = SenseHat()
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, "OFF")
-rgbled = RGBLED(128, 128, 128, 1)
+rgbled = RGBLED(128, 128, 128, 1, sense)
 
 
 #Initilize config class
@@ -110,8 +109,7 @@ def setLCDScreen():
 def setTargetTemp():
     target = request.forms.get("targetSlider")
     therm.setTarget(float(target))
-    
-    #redirect("/Temperature")
+    redirect("/Temperature")
 
 @route("/setLEDs", method="POST")
 def setLEDs():
@@ -123,6 +121,7 @@ def setLEDs():
     rgbled.setGreen(green)
     rgbled.setBlue(blue)
     rgbled.setStatus(status)
+    rgbled.updateLight(red, green, blue)
     redirect("/Lighting")
 
 def checkLatLong(lat, long):
@@ -176,8 +175,7 @@ def getWeatherData(owm, lat, long):
     return weather
 
 def getCurrentTemp():
-    return 18.9
-    #return sense.temp
+    return sense.temp
 
 def updateRoomTemp():
     therm.setRoomTemp(getCurrentTemp())
