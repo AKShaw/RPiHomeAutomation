@@ -5,6 +5,7 @@ class RGBLED():
         self.blue = blue
         self.status = status
         self.sense = sense
+        self.updateLight(red, green, blue)
 
     @property
     def getRed(self):
@@ -35,4 +36,8 @@ class RGBLED():
         self.status = value
 
     def updateLight(self, red, green, blue):
-        self.sense.set_pixels([red, green, blue]*64)
+        rgb = [red, green, blue]
+        matrix = []
+        for i in range(64):
+            matrix[i] = rgb
+        self.sense.set_pixels(matrix)
