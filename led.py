@@ -5,7 +5,7 @@ class RGBLED():
         self.blue = blue
         self.status = status
         self.sense = sense
-        self.updateLight(red, green, blue)
+        self.updateLight(red, green, blue, status)
 
     @property
     def getRed(self):
