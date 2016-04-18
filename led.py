@@ -36,4 +36,5 @@ class RGBLED():
         self.status = value
 
     def updateLight(self, red, green, blue):
+        rgb = [red, green, blue]
         self.sense.clear(rgb)
