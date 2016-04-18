@@ -36,8 +36,4 @@ class RGBLED():
         self.status = value
 
     def updateLight(self, red, green, blue):
-        rgb = [red, green, blue]
-        matrix = []
-        for i in range(64):
-            matrix[i] = rgb
-        self.sense.set_pixels(matrix)
+        self.sense.clear(rgb)
