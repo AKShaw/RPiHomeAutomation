@@ -39,6 +39,7 @@ iron-icon.padRight{
   margin-left:1%;
   padding:3%;
   overflow:overlay;
+  overflow-x:disable;
   height:19em;
 }
 
