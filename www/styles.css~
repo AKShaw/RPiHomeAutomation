@@ -39,7 +39,7 @@ iron-icon.padRight{
   margin-left:1%;
   padding:3%;
   overflow:overlay;
-  height:50em;
+  height:6.5em;
 }
 
 #miniCard{
