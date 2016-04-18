@@ -113,10 +113,10 @@ def setTargetTemp():
 
 @route("/setLEDs", method="POST")
 def setLEDs():
-    red = request.forms.get("redSlider")
-    green = request.forms.get("greenSlider")
-    blue = request.forms.get("blueSlider")
-    status = request.forms.get("onOff")
+    red = int(request.forms.get("redSlider"))
+    green = int(request.forms.get("greenSlider"))
+    blue = int(request.forms.get("blueSlider"))
+    status = int(request.forms.get("onOff"))
     rgbled.setRed(red)
     rgbled.setGreen(green)
     rgbled.setBlue(blue)
