@@ -3,7 +3,7 @@ class Thermostat():
         self.target=target
         self.roomTemp=roomTemp
         self.heatingStatus = heatingStatus
-        self.roomHumidity = roomHumidty
+        self.roomHumidity = roomHumidity
         self.roomPressure = roomPressure
 
     @property
