@@ -111,7 +111,6 @@ def setLCDScreen():
 def setTargetTemp():
     target = request.forms.get("targetSlider")
     therm.setTarget(float(target))
-    time.sleep(2)
     redirect("/Temperature")
 
 @route("/setLEDs", method="POST")
