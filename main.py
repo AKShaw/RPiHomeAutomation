@@ -19,7 +19,7 @@ import time
 board = Board()
 sense = SenseHat()
 lcd = SetLCD("", "", board)
-therm = Thermostat(20, 0, "OFF")
+therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 
 
