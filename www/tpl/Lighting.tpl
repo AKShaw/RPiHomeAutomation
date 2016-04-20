@@ -21,6 +21,7 @@
 	  paper-slider.small{
 	    width:10%;
 	    margin:auto;
+            --paper-slider-height:10px;
 	  }
 	</style>
 	<form is="iron-form" action="/setLEDs" method="POST">
