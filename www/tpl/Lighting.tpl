@@ -19,7 +19,7 @@
             width: 100%;
           }
 	  paper-slider.small{
-	    width:10%
+	    width:10%;
 	    margin:auto;
 	  }
 	</style>
