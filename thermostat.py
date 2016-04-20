@@ -1,9 +1,10 @@
 class Thermostat():
-    def __init__(self, target, roomTemp, heatingStatus):
+    def __init__(self, target, roomTemp, roomHumidity, roomPressure, heatingStatus):
         self.target=target
         self.roomTemp=roomTemp
         self.heatingStatus = heatingStatus
-
+        self.roomHumidity = roomHumidty
+        self.roomPressure = roomPressure
 
     @property
     def getTarget(self):
@@ -12,6 +13,20 @@ class Thermostat():
     def setTarget(self, value):
         self.updateHeating(self.roomTemp, value)
         self.target = value
+
+    @property
+    def getRoomHumidity(self):
+        return self.roomHumidity
+
+    def setRoomHumidity(self, value):
+        self.roomHumidity = value
+
+    @property
+    def getRoomPressure(self):
+        return self.roomPressure
+
+    def setRoomPressure(self, value):
+        self.roomPressure = value
 
     @property
     def getRoomTemp(self):

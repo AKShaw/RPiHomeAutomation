@@ -65,10 +65,12 @@ def index(area="Home"):
     configObj["lat"] = config.getLat
     configObj["long"] = config.getLong
 
-    updateRoomTemp()
+    updateRoom()
     tempObj = {}
     tempObj["target"]= therm.getTarget
-    tempObj["room"] = therm.getRoomTemp
+    tempObj["roomTemp"] = therm.getRoomTemp
+    tempObj["roomPressure"] = therm.getRoomPressure
+    tempObj["roomHumidity"] = therm.getRoomHumidity
     tempObj["heating"] = therm.getHeatingStatus
 
     lcdScreenObj = {}
@@ -174,15 +176,17 @@ def getWeatherData(owm, lat, long):
    
     return weather
 
-def getCurrentTemp():
-    return sense.temp
+def getCurrentRoom():
+    return [int(sense.temp), int(sense.humidity), int(sense.get_pressure())]
 
-def updateRoomTemp():
-    therm.setRoomTemp(getCurrentTemp())
+def updateRoom():
+    therm.setRoomTemp(getCurrentRoom()[0])
+    therm.setRoomHumidity(getCurrentRoom()[1])
+    therm.setRoomPressure(getCurrentRoom()[2])
 
 def start():
     setConfig()
-    updateRoomTemp()
+    updateRoom()
     run(host='0.0.0.0', port=8080)
 
 start()
