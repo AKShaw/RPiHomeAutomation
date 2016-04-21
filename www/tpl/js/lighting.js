@@ -14,3 +14,19 @@ form.addEventListener('iron-form-presubmit', function() {
 	var status = updateValue()
 	this.request.params["onOff"] = status;
 });
+
+red.addEventListener("change", function() {
+	Polymer.dom(event).localTarget.parentElement.submit();
+});
+
+blue.addEventListener("change", function() {
+	Polymer.dom(event).localTarget.parentElement.submit();
+});
+
+green.addEventListener("change", function() {
+	Polymer.dom(event).localTarget.parentElement.submit();
+});
+
+toggleBtn.addEventListener("change", function() {
+	Polymer.dom(event).localTarget.parentElement.submit();
+});
