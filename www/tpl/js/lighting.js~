@@ -12,5 +12,5 @@ function updateValue(){
 form.addEventListener('iron-form-presubmit', function() {
 	//this.request.method = 'POST';
 	var status = updateValue()
-	this.request.params["onOff"] = updateValue();
+	this.request.params["onOff"] = status;
 });
