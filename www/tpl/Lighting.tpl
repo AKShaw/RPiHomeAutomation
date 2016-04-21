@@ -18,23 +18,21 @@
        	  paper-slider {
             width: 100%;
           }
-	  paper-slider.small{
-	    width:10%;
+	  paper-toggle-button{
 	    margin:auto;
-            --paper-slider-height:10px;
 	  }
 	</style>
-	<form is="iron-form" action="/setLEDs" method="POST">
+	<form id="form" is="iron-form" action="/setLEDs" method="POST">
 		<h4>RGB settings:</h4>
 		R<paper-slider class="red" name="redSlider" pin min="0" max="255" value="{{rgb["red"]}}" editable></paper-slider>
 		G<paper-slider class="green" name="greenSlider" pin min="0" max="255" value="{{rgb["green"]}}" editable></paper-slider>
 		B<paper-slider class="blue" name="blueSlider" pin min="0" max="255" value="{{rgb["blue"]}}" editable></paper-slider>
 		<h4>Off/On:</h4>
-		%#<paper-slider class="small" name="onOff" pin min="0" max="1" value="{{rgb["status"]}}"></paper-slider>
-		<paper-toggle-button name="onOff" checked>On/off</paper-toggle-button>
+		<paper-toggle-button ischanged="updateValue()" id="toggleBtn" checked>Off or On</paper-toggle-button>
 		<paper-button raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); setToast.open();">Set RGB!</paper-button>
 	</form>
 	<paper-toast id="setToast" text="Set lighting settings!"></paper-toast>
+	
 </div>
 <div class="col-xs-0 col-md-3">
 </div>
