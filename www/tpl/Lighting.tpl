@@ -28,7 +28,7 @@
 		G<paper-slider class="green" name="greenSlider" pin min="0" max="255" value="{{rgb["green"]}}" editable></paper-slider>
 		B<paper-slider class="blue" name="blueSlider" pin min="0" max="255" value="{{rgb["blue"]}}" editable></paper-slider>
 		<h4>Off/On:</h4>
-		<paper-toggle-button ischanged="updateValue()" id="toggleBtn" checked>Off or On</paper-toggle-button>
+		<paper-toggle-button id="toggleBtn" checked>Off or On</paper-toggle-button>
 		<paper-button raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); setToast.open();">Set RGB!</paper-button>
 	</form>
 	<paper-toast id="setToast" text="Set lighting settings!"></paper-toast>

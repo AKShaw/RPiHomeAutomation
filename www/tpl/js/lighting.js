@@ -1,9 +1,9 @@
 function updateValue(){
 	var status = 1;	
-	if (toggleBtn.checked()==true){
+	if (toggleBtn.checked==true){
 		status="1";
 	}
-	else if (toggleBtn.checked()==false){
+	else if (toggleBtn.checked==false){
 		status="0";
 	}
 	return status;
