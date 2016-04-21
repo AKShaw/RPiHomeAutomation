@@ -1,5 +1,5 @@
 
-status=1;
+var status=1;
 
 function updateValue(){
 	if (toggleBtn.checked()==true){
