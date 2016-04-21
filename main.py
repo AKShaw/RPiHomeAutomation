@@ -118,7 +118,7 @@ def setLEDs():
     red = int(request.forms.get("redSlider"))
     green = int(request.forms.get("greenSlider"))
     blue = int(request.forms.get("blueSlider"))
-    status = int(request.forms.get("onOff"))
+    status = int(request.params.get("onOff"))
     rgbled.setRed(red)
     rgbled.setGreen(green)
     rgbled.setBlue(blue)
