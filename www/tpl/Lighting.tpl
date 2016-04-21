@@ -29,10 +29,12 @@
 		B<paper-slider id="blue" name="blueSlider" pin min="0" max="255" value="{{rgb["blue"]}}" editable></paper-slider>
 		<h4>Off/On:</h4>
 		<paper-toggle-button id="toggleBtn" checked>Off or On</paper-toggle-button>
-		<paper-button raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); setToast.open();">Set RGB!</paper-button>
 	</form>
-	<paper-toast id="setToast" text="Set lighting settings!"></paper-toast>
-	
 </div>
 <div class="col-xs-0 col-md-3">
 </div>
+%if rgb["status"]==1:
+<script>toggleBtn.checked=true</script>
+%elif rgb["status"]==0:
+<script>toggleBtn.checked=false</script>
+%end

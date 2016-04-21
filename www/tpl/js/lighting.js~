@@ -30,3 +30,7 @@ green.addEventListener("change", function() {
 toggleBtn.addEventListener("change", function() {
 	Polymer.dom(event).localTarget.parentElement.submit();
 });
+
+window.addEventListener('WebComponentsReady', function(e) {
+	toggleBtn.checked
+});
