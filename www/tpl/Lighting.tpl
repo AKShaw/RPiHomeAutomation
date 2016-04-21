@@ -33,8 +33,3 @@
 </div>
 <div class="col-xs-0 col-md-3">
 </div>
-%if rgb["status"]==1:
-<script>toggleBtn.checked=true</script>
-%elif rgb["status"]==0:
-<script>toggleBtn.checked=false</script>
-%end
