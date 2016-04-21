@@ -76,5 +76,6 @@
     </paper-header-panel>
   
   </paper-drawer-panel>
+  <script src="/static/tpl/js/lighting.js"></script>
 </body>
 </html>
