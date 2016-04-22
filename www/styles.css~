@@ -93,6 +93,10 @@ h3#lcd{
 	text-align:center;
 }
 
+#toggleBtn{
+
+}
+
 paper-slider#red { --paper-slider-knob-color: var(--paper-red-500); --paper-slider-active-color: var(--paper-red-500);}
 paper-slider#green {--paper-slider-knob-color: var(--paper-green-500);--paper-slider-active-color: var(--paper-green-500);}
 paper-slider#blue {--paper-slider-knob-color: var(--paper-light-blue-500);--paper-slider-active-color: var(--paper-light-blue-500);}
