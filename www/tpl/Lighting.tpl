@@ -28,7 +28,11 @@
 		G<paper-slider id="green" name="greenSlider" pin min="0" max="255" value="{{rgb["green"]}}" editable></paper-slider>
 		B<paper-slider id="blue" name="blueSlider" pin min="0" max="255" value="{{rgb["blue"]}}" editable></paper-slider>
 		<h4>Off/On:</h4>
+		%if rgb["status"]==1:
 		<paper-toggle-button id="toggleBtn" checked>Off or On</paper-toggle-button>
+		%elif rgb["status"]==0:
+		<paper-toggle-button id="toggleBtn">Off or On</paper-toggle-button>
+		%end
 	</form>
 </div>
 <div class="col-xs-0 col-md-3">
