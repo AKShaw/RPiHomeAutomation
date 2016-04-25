@@ -3,7 +3,7 @@ class PirBuzzer:
         self.board = board
         board.GPIO.setup(pir_pin, board.GPIO.IN)
         board.GPIO.setup(buzz_pin, board.GPIO.OUT)
-        board.GPIO.add_event_detect(pir_pin, board.GPIO.FALLING, callback=buzz, bouncetime=300)
+        board.GPIO.add_event_detect(pir_pin, board.GPIO.FALLING, callback=self.buzz, bouncetime=300)
 
     def detectMotion(self):
         while True:
