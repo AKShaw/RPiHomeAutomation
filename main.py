@@ -8,6 +8,7 @@ from sense_hat import SenseHat
 from board import Board
 from lcd import SetLCD
 from led import RGBLED
+from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
 from datetime import date
 import platform
@@ -21,6 +22,7 @@ sense = SenseHat()
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
+pirbuzz = PirBuzzer(board, 5, 6)
 
 
 #Initilize config class
@@ -184,11 +186,11 @@ def updateRoom():
     therm.setRoomHumidity(getCurrentRoom()[1])
     therm.setRoomPressure(getCurrentRoom()[2])
 
+
 def start():
     setConfig()
     updateRoom()
     run(host='0.0.0.0', port=8080)
 
 start()
-
 #TODO: Write LED class, add setLEDs method into here that gets data and sets lights etc
