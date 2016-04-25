@@ -1,6 +1,7 @@
 class PirBuzzer:
     def __init__(self, board, pir_pin, buzz_pin):
         self.board = board
+        self.pir_pin = pir_pin
         self.buzz_pin = buzz_pin
         board.GPIO.setup(pir_pin, board.GPIO.IN)
         board.GPIO.setup(buzz_pin, board.GPIO.OUT)
@@ -15,7 +16,7 @@ class PirBuzzer:
             time.sleep(1)
 
     def buzz(self):
-        board.GPIO.output(self.buzz_pin, board.GPIO.HIGH)
+        board.GPIO.output(buzz_pin, board.GPIO.HIGH)
         time.sleep(0.1)
-        board.GPIO.output(self.buzz_pin, board.GPIO.LOW)
+        board.GPIO.output(buzz_pin, board.GPIO.LOW)
         
