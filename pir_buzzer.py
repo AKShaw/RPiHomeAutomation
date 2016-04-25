@@ -18,6 +18,7 @@ class PirBuzzer:
             time.sleep(1)
 
     def buzz(self, pin):
+        print ("Motion detected")
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.HIGH)
         time.sleep(0.1)
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.LOW)
