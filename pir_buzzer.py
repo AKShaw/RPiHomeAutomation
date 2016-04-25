@@ -17,7 +17,7 @@ class PirBuzzer:
                 print("No motion")
             time.sleep(1)
 
-    def buzz(self, blank):
+    def buzz(self):
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.HIGH)
         time.sleep(0.1)
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.LOW)
