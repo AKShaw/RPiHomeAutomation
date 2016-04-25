@@ -1,3 +1,5 @@
+import time
+
 class PirBuzzer:
     def __init__(self, board, pir_pin, buzz_pin):
         self.board = board
