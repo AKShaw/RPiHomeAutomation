@@ -7,11 +7,11 @@ class PirBuzzer:
 
     def detectMotion(self):
         while True:
-        if board.GPIO.input(PIR_PIN):
-            print ("Motion")
-        else:
-            print("No motion")
-        time.sleep(1)
+            if board.GPIO.input(PIR_PIN):
+                print ("Motion")
+            else:
+                print("No motion")
+            time.sleep(1)
 
     def buzz(self):
         board.GPIO.output(BUZZ_PIN, GPIO.HIGH)
