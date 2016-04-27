@@ -1,22 +1,28 @@
 #DEPENDENCIES:
 #   bottle
 #   pyowm
+#   sensehat
 
+#Special imports
 from bottle import *
-from config import *
 from sense_hat import SenseHat
+import pyowm
+from datetime import date
+
+#general imports
+import platform
+import sys
+import calendar
+import time
+
+#Imports from classes written by myself
+from config import *
 from board import Board
 from lcd import SetLCD
 from led import RGBLED
 from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
 from photoresistor import PhotoResistor
-from datetime import date
-import platform
-import sys
-import calendar
-import pyowm
-import time
 
 
 board = Board()
