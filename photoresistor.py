@@ -15,5 +15,6 @@ class PhotoResistor():
         # This takes about 1 millisecond per loop cycle
         while (self.board.GPIO.input(self.pin) == self.board.GPIO.LOW):
                 reading += 1
+	print (reading)
         return reading
         
