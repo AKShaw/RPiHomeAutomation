@@ -1,5 +1,5 @@
 class PhotoResistor():
-    def __init__(self, pin, board)
+    def __init__(self, pin, board):
         self.pin = pin
         self.board = board
 

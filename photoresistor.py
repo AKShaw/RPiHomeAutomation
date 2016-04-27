@@ -1,3 +1,5 @@
+import time
+
 class PhotoResistor():
     def __init__(self, pin, board):
         self.pin = pin
