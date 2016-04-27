@@ -84,7 +84,6 @@ def index(area="Home"):
     rgbObj["green"]=rgbled.getGreen
     rgbObj["blue"]=rgbled.getBlue
     rgbObj["status"]=rgbled.getStatus
-    print ("Lux from sensor: " + str(luxSensor.getLux()))
     rgbObj["lux"]=luxSensor.getLux()
 
     return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
