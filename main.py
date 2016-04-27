@@ -24,7 +24,7 @@ sense = SenseHat()
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
-luxSensor = PhotoResister(22, board)
+luxSensor = PhotoResistor(22, board)
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
