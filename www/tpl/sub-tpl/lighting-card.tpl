@@ -8,6 +8,6 @@
 </div>
 <div class="col-xs-3">
 	<h2 class="title">Room:</h2>
-	<h4>Lux level: {{rgb["status"]}}
+	<h4>Lux level: {{rgb["lux"]}}
 </div>
 </div>
