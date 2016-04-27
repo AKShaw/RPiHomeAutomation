@@ -10,6 +10,7 @@ from lcd import SetLCD
 from led import RGBLED
 from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
+from photoresistor import PhotoResistor
 from datetime import date
 import platform
 import sys
@@ -17,20 +18,19 @@ import calendar
 import pyowm
 import time
 
+
 board = Board()
 sense = SenseHat()
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
-pirbuzz = PirBuzzer(board, 5, 6)
-
+luxSensor = PhotoResister(22, board)
+#pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
 def setConfig():
     global config
     config = GetConfig()
-
-
 
 #Set static path for files
 if (platform.system() == "Windows"):
@@ -84,6 +84,7 @@ def index(area="Home"):
     rgbObj["green"]=rgbled.getGreen
     rgbObj["blue"]=rgbled.getBlue
     rgbObj["status"]=rgbled.getStatus
+    rgbObj["lux"]=luxSensor.getLux()
 
     return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
 

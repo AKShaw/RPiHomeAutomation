@@ -9,14 +9,6 @@ class PirBuzzer:
         self.board.GPIO.setup(buzz_pin, board.GPIO.OUT)
         self.board.GPIO.add_event_detect(pir_pin, board.GPIO.FALLING, callback=self.buzz, bouncetime=300)
 
-    def detectMotion(self):
-        while True:
-            if board.GPIO.input(PIR_PIN):
-                print ("Motion")
-            else:
-                print("No motion")
-            time.sleep(1)
-
     def buzz(self, pin):
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.HIGH)
         time.sleep(0.1)
