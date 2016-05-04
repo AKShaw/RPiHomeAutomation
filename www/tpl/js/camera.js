@@ -5,6 +5,6 @@ setInterval(function() {
 	image.className = "camera";
 	image.id = "frame";
 	var timeNow = Math.floor(Date.now()/1000)
-	image.src= "/video_feed"+"?"+ string(timeNow);
+	image.src= "/video_feed"+"?"+ String(timeNow);
 	card.append(image);
 }, 200);
