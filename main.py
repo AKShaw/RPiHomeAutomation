@@ -140,7 +140,7 @@ def setLEDs():
 
 @route('/video_feed')
 def video_feed():
-    return Response(gen(Camera()),
+    return Response(gen(camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 def checkLatLong(lat, long):
