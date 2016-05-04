@@ -141,8 +141,9 @@ def setLEDs():
 
 @route('/video_feed')
 def video_feed():
-    camera.capture("frame.jpg")
-    return static_file("frame.jpg", root="/home/pi/RPiHomeAutomation/")
+    #camera.capture("frame.jpg")
+    #return static_file("frame.jpg", root="/home/pi/RPiHomeAutomation/")
+    return camera.start_preview()
 
 def checkLatLong(lat, long):
     try:
