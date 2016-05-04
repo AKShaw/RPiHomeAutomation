@@ -1,8 +1,8 @@
 setInterval(function() {
 	var image = document.createElement("img");
-	var card = document.getElementsByClassName("camContain");
+	var card = $(".camContain")
 	image.className = "camera";
 	image.id = "frame";
 	image.src= "/video_feed";
-	card.appendChild(image);
+	card.append(image);
 }, 200);
