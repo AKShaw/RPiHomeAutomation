@@ -13,6 +13,7 @@ import picamera
 #general imports
 import platform
 import sys
+import os
 import calendar
 import time
 
@@ -140,6 +141,7 @@ def setLEDs():
 
 @route('/video_feed')
 def video_feed():
+    os.remove("/home/pi/RPiHomeAutomation/frame.jpg")
     camera.capture("frame.jpg")
     return static_file("frame.jpg", root="/home/pi/RPiHomeAutomation/")
 

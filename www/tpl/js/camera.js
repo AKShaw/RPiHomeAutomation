@@ -1,4 +1,5 @@
 setInterval(function() {
+	$(".camera").remove()
 	var image = document.createElement("img");
 	var card = $(".camContain")
 	image.className = "camera";
