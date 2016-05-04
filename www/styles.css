@@ -92,3 +92,8 @@ h3#lcd{
 #center{
 	text-align:center;
 }
+
+.camera{
+	width:95%;
+	margin:auto;
+}

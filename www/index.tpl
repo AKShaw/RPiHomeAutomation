@@ -77,5 +77,6 @@
   
   </paper-drawer-panel>
   <script src="/static/tpl/js/lighting.js"></script>
+  <script src="/static/tpl/js/camera.js"></script>
 </body>
 </html>

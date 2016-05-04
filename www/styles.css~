@@ -92,7 +92,3 @@ h3#lcd{
 #center{
 	text-align:center;
 }
-
-#toggleBtn{
-	margin:auto;	
-}
