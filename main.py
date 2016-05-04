@@ -140,8 +140,8 @@ def setLEDs():
 
 @route('/video_feed')
 def video_feed():
-    return Response(gen(camera),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    camera.capture("frame.jpg")
+    return static_file("frame.jpg", root="/home/pi/RPiHomeAutomation/")
 
 def checkLatLong(lat, long):
     try:
@@ -192,12 +192,6 @@ def getWeatherData(owm, lat, long):
     weather["color"] = color
    
     return weather
-
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 def getCurrentRoom():
     return [int(sense.temp), int(sense.humidity), int(sense.get_pressure())]
