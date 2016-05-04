@@ -8,6 +8,7 @@ from bottle import *
 from sense_hat import SenseHat
 import pyowm
 from datetime import date
+import picamera
 
 #general imports
 import platform
@@ -31,6 +32,7 @@ lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
+camera = picamera.PiCamera()
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
@@ -135,6 +137,12 @@ def setLEDs():
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
 
+
+@route('/video_feed')
+def video_feed():
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
 def checkLatLong(lat, long):
     try:
         if (-90 <= float(lat) <= 90 and -180 <= float(long) <= 180):
@@ -184,6 +192,12 @@ def getWeatherData(owm, lat, long):
     weather["color"] = color
    
     return weather
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 def getCurrentRoom():
     return [int(sense.temp), int(sense.humidity), int(sense.get_pressure())]

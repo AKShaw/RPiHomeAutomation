@@ -13,7 +13,7 @@
   <link rel="import" href="/static/bower_components/iron-icons/iron-icons.html">
   <link rel="import" href="/static/bower_components/iron-icons/hardware-icons.html">
   <link rel="import" href="/static/bower_components/iron-icons/places-icons.html">
-  <link rel="import" href="/static/bower_components/iron-icons/av-icons.html">
+  <link rel="import" href="/static/bower_components/iron-icons/image-icons.html">
   <link rel="import" href="/static/bower_components/iron-icon/iron-icon.html">
   <link rel="import" href="/static/bower_components/paper-toolbar/paper-toolbar.html">
   <link rel="import" href="/static/bower_components/font-roboto/roboto.html">
@@ -48,8 +48,8 @@
 		%	include("www/tpl/Lighting.tpl")
 		%elif area=="Thermostat":
 		%	include("www/tpl/Thermostat.tpl")
-		%elif area=="Windows":
-		%	include("www/tpl/Windows.tpl")
+		%elif area=="Camera":
+		%	include("www/tpl/Camera.tpl")
 		%elif area=="LCDScreen":
 		%	include("www/tpl/LCDScreen.tpl")
 		%elif area=="Config":
@@ -68,7 +68,7 @@
       <hr width="100%">
       <a class="blank" href="Lighting"><paper-item><iron-icon class="padRight" icon="lightbulb-outline"></iron-icon>Lighting</paper-item></a>
       <a class="blank" href="Thermostat"><paper-item><iron-icon class="padRight" icon="places:ac-unit"></iron-icon>Thermostat</paper-item></a>
-      <a class="blank" href="Windows"><paper-item><iron-icon class="padRight" icon="cloud"></iron-icon>Windows</paper-item></a>
+      <a class="blank" href="Camera"><paper-item><iron-icon class="padRight" icon="image:camera-alt"></iron-icon>Camera</paper-item></a>
       <a class="blank" href="LCDScreen"><paper-item><iron-icon class="padRight" icon="check-box-outline-blank"></iron-icon>LCD Screen</paper-item></a>
       <hr width="100%">
 	  <a class="blank" href="Config"><paper-item><iron-icon class="padRight" icon="build"></iron-icon>Configuration</paper-item</a>
