@@ -7,4 +7,4 @@ setInterval(function() {
 	var timeNow = Math.floor(Date.now()/1000)
 	image.src= "/video_feed"+"?"+ String(timeNow);
 	card.append(image);
-}, 200);
+}, 1000);
