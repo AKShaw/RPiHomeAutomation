@@ -4,6 +4,7 @@ setInterval(function() {
 	var card = $(".camContain")
 	image.className = "camera";
 	image.id = "frame";
-	image.src= "/video_feed";
+	var timeNow = math.floor(Date.now()/1000)
+	image.src= "/video_feed"+"?"+ string(timeNow);
 	card.append(image);
 }, 200);

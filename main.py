@@ -141,10 +141,6 @@ def setLEDs():
 
 @route('/video_feed')
 def video_feed():
-    try:
-        os.remove("/home/pi/RPiHomeAutomation/frame.jpg")
-    except:
-        print("No file to remove")
     camera.capture("frame.jpg")
     return static_file("frame.jpg", root="/home/pi/RPiHomeAutomation/")
 
