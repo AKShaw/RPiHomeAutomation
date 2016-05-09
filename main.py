@@ -8,8 +8,6 @@ from bottle import *
 from sense_hat import SenseHat
 import pyowm
 from datetime import date
-import socket
-import picamera
 
 #general imports
 import platform

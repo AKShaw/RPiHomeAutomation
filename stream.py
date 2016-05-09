@@ -1,3 +1,7 @@
+import socket
+import picamera
+import time
+
 def stream():
     with picamera.PiCamera() as camera:
         camera.resoulution = (640, 480)
