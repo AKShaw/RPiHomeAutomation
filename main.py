@@ -201,7 +201,7 @@ def start():
     setConfig()
     updateRoom()
     print("Starting stream...")
-    streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=(,))
+    streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
     streamThread.start()
     print("Starting server...")
     serverThread = threading.Thread(target=run, name="Server", args=(host="0.0.0.0", port=8080))
