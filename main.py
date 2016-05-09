@@ -9,7 +9,6 @@ from sense_hat import SenseHat
 import pyowm
 from datetime import date
 import picamera
-from camera import Camera
 
 #general imports
 import platform
@@ -138,19 +137,6 @@ def setLEDs():
     rgbled.setStatus(status)
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
-
-"""Code by miguelgrinberg for Camera streaming"""
-@route('/video_feed')
-def video_feed():
-    return Response(gen(Camera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-"""Enf of miguelgrinberg code"""
 
 def checkLatLong(lat, long):
     try:
