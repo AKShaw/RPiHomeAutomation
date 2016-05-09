@@ -25,6 +25,7 @@ from led import RGBLED
 from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
 from photoresistor import PhotoResistor
+from stream import Stream
 
 
 board = Board()
@@ -34,6 +35,7 @@ therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
 camera = picamera.PiCamera()
+stream = Stream()
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
@@ -203,4 +205,6 @@ def start():
     run(host='0.0.0.0', port=8080)
 
 start()
+stream.main()
+
 #TODO: Write LED class, add setLEDs method into here that gets data and sets lights etc
