@@ -2,22 +2,25 @@ import socket
 import picamera
 import time
 
-def stream():
-    with picamera.PiCamera() as camera:
-        camera.resoulution = (640, 480)
-        camera.framerate = 24
+class Stream():
+    def __init__(self):
+        pass
+    
 
-        server = socket.socket()
-        server.bind(("0.0.0.0", 8000))
-        server.listen(0)
+    def stream(self):
+        with picamera.PiCamera() as camera:
+            camera.resoulution = (640, 480)
+            camera.framerate = 24
 
-        conn = server.accept()[0].makefile("wb")
-        try:
-            camera.start_recording(conn, format="h264")
-            camera.wait_recording(60)
-            camera.stop_recording()
-        finally:
-            conn.close()
-            server.close()
+            server = socket.socket()
+            server.bind(("0.0.0.0", 8000))
+            server.listen(0)
 
-stream()
+            conn = server.accept()[0].makefile("wb")
+            try:
+                camera.start_recording(conn, format="h264")
+                camera.wait_recording(60)
+                camera.stop_recording()
+            finally:
+                conn.close()
+                server.close()
