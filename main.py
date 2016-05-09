@@ -25,7 +25,6 @@ from led import RGBLED
 from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
 from photoresistor import PhotoResistor
-from stream import Stream
 
 
 board = Board()
@@ -35,7 +34,6 @@ therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
 camera = picamera.PiCamera()
-stream = Stream()
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
@@ -198,12 +196,29 @@ def updateRoom():
     therm.setRoomHumidity(getCurrentRoom()[1])
     therm.setRoomPressure(getCurrentRoom()[2])
 
+def stream():
+    with picamera.PiCamera() as camera:
+        camera.resoulution = (640, 480)
+        camera.framerate = 24
+
+        server = socket.socket()
+        server.bind(("0.0.0.0", 8000))
+        server.listen(0)
+
+        conn = server.accept()[0].makefile("wb")
+        try:
+            camera.start_recording(conn, format="h264")
+            camera.wait_recording(60)
+            camera.stop_recording()
+        finally:
+            conn.close()
+            server.close()
 
 def start():
     setConfig()
     updateRoom()
     print("Starting stream...")
-    stream.main()
+    stream()
     print("Starting server...")
     run(host='0.0.0.0', port=8080)
     print("All started")
