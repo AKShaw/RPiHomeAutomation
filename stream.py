@@ -4,10 +4,10 @@ import picamera
 
 
 class Stream():
-    def __init__():
+    def __init__(self):
         pass
 
-    def main():
+    def main(self):
         with picamera.PiCamera() as camera:
             camera.resolution = (640, 480)
             camera.framerate = 24
