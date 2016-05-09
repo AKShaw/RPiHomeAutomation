@@ -204,7 +204,7 @@ def start():
     streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
     streamThread.start()
     print("Starting server...")
-    serverThread = threading.Thread(target=run, name="Server", args=(host="0.0.0.0", port=8080))
+    serverThread = threading.Thread(target=run, name="Server", args=((host="0.0.0.0"), (port=8080)))
     #run(host='0.0.0.0', port=8080)
     serverThread.start()
     print("All started")
