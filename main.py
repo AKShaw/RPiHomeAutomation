@@ -209,6 +209,5 @@ def start():
     print("All started")
 
 start()
-stream.main()
 
 #TODO: Write LED class, add setLEDs method into here that gets data and sets lights etc
