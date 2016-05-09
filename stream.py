@@ -18,7 +18,7 @@ class Stream():
 
             conn = server.accept()[0].makefile("wb")
             try:
-                camera.start_recording(conn, format="mjpeg")
+                camera.start_recording(conn, format="h264")
                 camera.wait_recording(60)
                 camera.stop_recording()
             finally:
