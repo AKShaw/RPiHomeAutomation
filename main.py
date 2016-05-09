@@ -202,7 +202,11 @@ def updateRoom():
 def start():
     setConfig()
     updateRoom()
+    print("Starting stream...")
+    stream.main()
+    print("Starting server...")
     run(host='0.0.0.0', port=8080)
+    print("All started")
 
 start()
 stream.main()
