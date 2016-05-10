@@ -1,55 +1,26 @@
-"""CODE BY Miguel Grinberg"""
-import time
-import io
-import threading
+import socket
 import picamera
+import time
 
+class Stream():
+    def __init__(self):
+        pass
+    
 
-class Camera(object):
-    thread = None  # background thread that reads frames from camera
-    frame = None  # current frame is stored here by background thread
-    last_access = 0  # time of last client access to the camera
-
-    def initialize(self):
-        if Camera.thread is None:
-            # start background frame thread
-            Camera.thread = threading.Thread(target=self._thread)
-            Camera.thread.start()
-
-            # wait until frames start to be available
-            while self.frame is None:
-                time.sleep(0)
-
-    def get_frame(self):
-        Camera.last_access = time.time()
-        self.initialize()
-        return self.frame
-
-    @classmethod
-    def _thread(cls):
+    def stream(self):
         with picamera.PiCamera() as camera:
-            # camera setup
-            camera.resolution = (320, 240)
-            camera.hflip = True
-            camera.vflip = True
+            camera.resoulution = (640, 480)
+            camera.framerate = 24
 
-            # let camera warm up
-            camera.start_preview()
-            time.sleep(2)
+            server = socket.socket()
+            server.bind(("0.0.0.0", 8000))
+            server.listen(0)
 
-            stream = io.BytesIO()
-            for foo in camera.capture_continuous(stream, 'jpeg',
-                                                 use_video_port=True):
-                # store frame
-                stream.seek(0)
-                cls.frame = stream.read()
-
-                # reset stream for next frame
-                stream.seek(0)
-                stream.truncate()
-
-                # if there hasn't been any clients asking for frames in
-                # the last 10 seconds stop the thread
-                if time.time() - cls.last_access > 10:
-                    break
-        cls.thread = None
+            conn = server.accept()[0].makefile("wb")
+            try:
+                camera.start_recording(conn, format="h264")
+                camera.wait_recording(60)
+                camera.stop_recording()
+            finally:
+                conn.close()
+                server.close()
