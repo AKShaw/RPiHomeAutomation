@@ -25,7 +25,7 @@ from led import RGBLED
 from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
 from photoresistor import PhotoResistor
-from stream import Stream
+from stream import Camera
 
 
 board = Board()
@@ -34,7 +34,6 @@ lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
-stream = Stream()
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
@@ -139,6 +138,19 @@ def setLEDs():
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
 
+"""Code by Miguel Grinberg"""
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@route('/video_feed')
+def video_feed():
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+"""End of Miguel Grinbergs code"""
+
 def checkLatLong(lat, long):
     try:
         if (-90 <= float(lat) <= 90 and -180 <= float(long) <= 180):
@@ -200,10 +212,10 @@ def updateRoom():
 def start():
     setConfig()
     updateRoom()
-    print("Starting stream...")
-    streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
-    streamThread.start()
-    print("Starting server...")
+    #print("Starting stream...")
+    #streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
+    #streamThread.start()
+    #print("Starting server...")
     #serverThread = threading.Thread(target=run, name="Server", args=((host="0.0.0.0"), (port=8080)))
     run(host='0.0.0.0', port=8080)
     #serverThread.start()
