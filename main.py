@@ -141,6 +141,10 @@ def setLEDs():
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
 
+@route("/camtest")
+def camtest():
+    return render("<img src=\"/video_feed\">")
+
 """Code by Miguel Grinberg"""
 
 @route('/video_feed')
