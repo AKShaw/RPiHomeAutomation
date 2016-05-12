@@ -27,6 +27,9 @@ from thermostat import Thermostat
 from photoresistor import PhotoResistor
 from stream import Stream
 
+#Class by Miguel Grinberg
+from camera_pi import Camera
+
 
 board = Board()
 sense = SenseHat()
@@ -35,6 +38,7 @@ therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
 stream = Stream()
+
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
@@ -138,6 +142,23 @@ def setLEDs():
     rgbled.setStatus(status)
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
+
+"""Code by Miguel Grinberg"""
+
+@route('/video_feed')
+def video_feed():
+    """Video streaming route. Put this in the src attribute of an img tag."""
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+def gen(camera):
+    """Video streaming generator function."""
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+"""End of code by Miguel Grinberg"""
 
 def checkLatLong(lat, long):
     try:
