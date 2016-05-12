@@ -25,7 +25,6 @@ from led import RGBLED
 from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
 from photoresistor import PhotoResistor
-from stream import Stream
 
 #Class by Miguel Grinberg
 from camera_pi import Camera
