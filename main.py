@@ -36,7 +36,6 @@ lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
-stream = Stream()
 
 #pirbuzz = PirBuzzer(board, 5, 6)
 
@@ -220,9 +219,9 @@ def updateRoom():
 def start():
     setConfig()
     updateRoom()
-    print("Starting stream...")
-    streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
-    streamThread.start()
+    #print("Starting stream...")
+    #streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
+    #streamThread.start()
     print("Starting server...")
     run(host='0.0.0.0', port=8080, threaded=True)
     print("All started")
