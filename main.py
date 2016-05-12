@@ -143,7 +143,7 @@ def setLEDs():
 
 @route("/camtest")
 def camtest():
-    return template("<img src=\"/video_feed\">")
+    return "<img src=\"/video_feed\">"
 
 """Code by Miguel Grinberg"""
 
