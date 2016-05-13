@@ -38,13 +38,13 @@ rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
 #pirbuzz = PirBuzzer(board, 5, 6)
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 #Initilize config class
 def setConfig():
     global config
     config = GetConfig()
-
+"""
 #Set static path for files
 if (platform.system() == "Windows"):
     #obviosuly Windows wont work for the GPIO inputs, just for testing template files and general non-linux
@@ -71,7 +71,7 @@ elif (platform.system() == "Linux"):
 else:	
     print("Operating system not supported for development! Please use Windows or Linux")
     sys.exit()
-	
+"""
 
 @app.route('/<area>')
 @app.route('/')
