@@ -4,7 +4,7 @@
 #   sensehat
 
 #Special imports
-from flask import *
+from bottle import *
 from sense_hat import SenseHat
 import pyowm
 from datetime import date
@@ -25,9 +25,7 @@ from led import RGBLED
 from pir_buzzer import PirBuzzer
 from thermostat import Thermostat
 from photoresistor import PhotoResistor
-
-#Class by Miguel Grinberg
-from camera_pi import Camera
+from stream import Stream
 
 
 board = Board()
@@ -36,21 +34,20 @@ lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
+stream = Stream()
 #pirbuzz = PirBuzzer(board, 5, 6)
-
-app = Flask(__name__, static_url_path='/static')
 
 #Initilize config class
 def setConfig():
     global config
     config = GetConfig()
-"""
+
 #Set static path for files
 if (platform.system() == "Windows"):
     #obviosuly Windows wont work for the GPIO inputs, just for testing template files and general non-linux
     #constrained stuff etc
     print("Running on Windows...")
-    @app.route("/static/<filepath:path>")
+    @route("/static/<filepath:path>")
     def server_static(filepath):
         return static_file(filepath, root='C:/Users/ashaw/RPiHomeAutomation/www')
     print("Static path set!")
@@ -58,23 +55,23 @@ elif (platform.system() == "Linux"):
     try:
         import RPi.GPIO as GPIO
         print("Running on Raspberry Pi...")
-        @app.route("/static/<filepath:path>")
+        @route("/static/<filepath:path>")
         def server_static(filepath):
             return static_file(filepath, root='/home/pi/RPiHomeAutomation/www')
         print("Static path set!")
     except ImportError:	
         print("Running on Linux...")
-        @app.route("/static/<filepath:path>")
+        @route("/static/<filepath:path>")
         def server_static(filepath):
             return static_file(filepath, root='/home/alex/RPiHomeAutomation/www')
         print("Static path set!")
 else:	
     print("Operating system not supported for development! Please use Windows or Linux")
     sys.exit()
-"""
+	
 
-@app.route('/<area>')
-@app.route('/')
+@route('/<area>')
+@route('/')
 def index(area="Home"):
     configObj = {}
     configObj["lat"] = config.getLat
@@ -101,7 +98,7 @@ def index(area="Home"):
 
     return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
 
-@app.route("/saveConfig", method="POST")
+@route("/saveConfig", method="POST")
 def writeConfig():
     lat=request.forms.get("lat")
     long=request.forms.get("long")
@@ -115,7 +112,7 @@ def writeConfig():
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
 
-@app.route("/setLCDScreen", method="POST")
+@route("/setLCDScreen", method="POST")
 def setLCDScreen():
     firstLine = request.forms.get("line1")
     secondLine = request.forms.get("line2")
@@ -123,13 +120,13 @@ def setLCDScreen():
     lcd.setLine2(secondLine)
     redirect("/LCDScreen")
 
-@app.route("/setTargetTemp", method="POST")
+@route("/setTargetTemp", method="POST")
 def setTargetTemp():
     target = request.forms.get("targetSlider")
     therm.setTarget(float(target))
     redirect("/Temperature")
 
-@app.route("/setLEDs", method="POST")
+@route("/setLEDs", method="POST")
 def setLEDs():
     red = int(request.forms.get("redSlider"))
     green = int(request.forms.get("greenSlider"))
@@ -141,27 +138,6 @@ def setLEDs():
     rgbled.setStatus(status)
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
-
-@app.route("/camtest")
-def camtest():
-    return "<img src=\"/video_feed\">"
-
-"""Code by Miguel Grinberg"""
-
-@app.route('/video_feed')
-def video_feed():
-    """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(Camera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-
-def gen(camera):
-    """Video streaming generator function."""
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-"""End of code by Miguel Grinberg"""
 
 def checkLatLong(lat, long):
     try:
@@ -224,9 +200,9 @@ def updateRoom():
 def start():
     setConfig()
     updateRoom()
-    #print("Starting stream...")
-    #streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
-    #streamThread.start()
+    print("Starting stream...")
+    streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
+    streamThread.start()
     print("Starting server...")
     run(host='0.0.0.0', port=8080, threaded=True)
     print("All started")
