@@ -50,7 +50,7 @@ if (platform.system() == "Windows"):
     #obviosuly Windows wont work for the GPIO inputs, just for testing template files and general non-linux
     #constrained stuff etc
     print("Running on Windows...")
-    @route("/static/<filepath:path>")
+    @app.route("/static/<filepath:path>")
     def server_static(filepath):
         return static_file(filepath, root='C:/Users/ashaw/RPiHomeAutomation/www')
     print("Static path set!")
@@ -58,13 +58,13 @@ elif (platform.system() == "Linux"):
     try:
         import RPi.GPIO as GPIO
         print("Running on Raspberry Pi...")
-        @route("/static/<filepath:path>")
+        @app.route("/static/<filepath:path>")
         def server_static(filepath):
             return static_file(filepath, root='/home/pi/RPiHomeAutomation/www')
         print("Static path set!")
     except ImportError:	
         print("Running on Linux...")
-        @route("/static/<filepath:path>")
+        @app.route("/static/<filepath:path>")
         def server_static(filepath):
             return static_file(filepath, root='/home/alex/RPiHomeAutomation/www')
         print("Static path set!")
