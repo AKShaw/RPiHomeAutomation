@@ -4,7 +4,7 @@
 #   sensehat
 
 #Special imports
-from bottle import *
+from flask import *
 from sense_hat import SenseHat
 import pyowm
 from datetime import date
@@ -36,8 +36,9 @@ lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
-
 #pirbuzz = PirBuzzer(board, 5, 6)
+
+app = Flask(__name__)
 
 #Initilize config class
 def setConfig():
@@ -72,8 +73,8 @@ else:
     sys.exit()
 	
 
-@route('/<area>')
-@route('/')
+@app.route('/<area>')
+@app.route('/')
 def index(area="Home"):
     configObj = {}
     configObj["lat"] = config.getLat
@@ -100,7 +101,7 @@ def index(area="Home"):
 
     return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
 
-@route("/saveConfig", method="POST")
+@app.route("/saveConfig", method="POST")
 def writeConfig():
     lat=request.forms.get("lat")
     long=request.forms.get("long")
@@ -114,7 +115,7 @@ def writeConfig():
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
 
-@route("/setLCDScreen", method="POST")
+@app.route("/setLCDScreen", method="POST")
 def setLCDScreen():
     firstLine = request.forms.get("line1")
     secondLine = request.forms.get("line2")
@@ -122,13 +123,13 @@ def setLCDScreen():
     lcd.setLine2(secondLine)
     redirect("/LCDScreen")
 
-@route("/setTargetTemp", method="POST")
+@app.route("/setTargetTemp", method="POST")
 def setTargetTemp():
     target = request.forms.get("targetSlider")
     therm.setTarget(float(target))
     redirect("/Temperature")
 
-@route("/setLEDs", method="POST")
+@app.route("/setLEDs", method="POST")
 def setLEDs():
     red = int(request.forms.get("redSlider"))
     green = int(request.forms.get("greenSlider"))
@@ -141,13 +142,13 @@ def setLEDs():
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
 
-@route("/camtest")
+@app.route("/camtest")
 def camtest():
     return "<img src=\"/video_feed\">"
 
 """Code by Miguel Grinberg"""
 
-@route('/video_feed')
+@app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(gen(Camera()),
