@@ -28,15 +28,18 @@ class Camera(object):
     def _thread(cls):
         with picamera.PiCamera() as camera:
             # camera setup
+            print("Camera setup")
             camera.resolution = (320, 240)
             camera.hflip = True
             camera.vflip = True
 
             # let camera warm up
+            print("camera warmup")
             camera.start_preview()
             time.sleep(2)
 
             stream = io.BytesIO()
+            print("stream initilized")
             for foo in camera.capture_continuous(stream, 'jpeg',
                                                  use_video_port=True):
                 # store frame
