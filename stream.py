@@ -16,7 +16,6 @@ class IM:
     def __init__(self):
         self.file = bytes()
 
-    @property
     def write(self, data):
         self.file = data
 
