@@ -144,6 +144,11 @@ def camFeed():
     im = camStream.getData()
     return im
 
+@route("/camTest")
+def camTest():
+    im = camStream.getData()
+    return "<img src='"+im+"'>"
+
 def checkLatLong(lat, long):
     try:
         if (-90 <= float(lat) <= 90 and -180 <= float(long) <= 180):
