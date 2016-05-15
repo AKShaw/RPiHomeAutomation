@@ -1,9 +1,8 @@
 $( document ).ready(function() {
-	var camContain = $(".camContain")
-	var i = 0
+	var camContain = $(".camContain");
 	setInterval(function() {
-		$(".camera").remove()
-		camContain.append("<img class='camera' src='/camFeed?i="+i.toString()+"'>")
-		i = i+1
+		$(".camera").remove();
+		var time = Date.now() / 1000 | 0;
+		camContain.append("<img class='camera' src='/camFeed?i="++"'>");
 	}, 1000);
 });
