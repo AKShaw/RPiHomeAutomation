@@ -9,6 +9,7 @@ class Stream():
             im = open("image", "w+b")
             camera.resolution=(640,480)
             camera.capture(im, format="jpeg")
+            print (im.read())
             return im.read()
             
         
