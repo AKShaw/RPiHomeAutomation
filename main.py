@@ -53,35 +53,8 @@ def server_static(filepath):
 @route('/<area>')
 @route('/')
 def index(area="Home"):
-    init=int(time.time())
-    configObj = {}
-    configObj["lat"] = config.getLat
-    configObj["long"] = config.getLong
-
-    updateRoom()
-    tempObj = {}
-    tempObj["target"]= therm.getTarget
-    tempObj["roomTemp"] = therm.getRoomTemp
-    tempObj["roomPressure"] = therm.getRoomPressure
-    tempObj["roomHumidity"] = therm.getRoomHumidity
-    tempObj["heating"] = therm.getHeatingStatus
-
-    lcdScreenObj = {}
-    lcdScreenObj["firstLine"] = lcd.getLine1
-    lcdScreenObj["secondLine"] = lcd.getLine2
-
-    rgbObj = {}
-    rgbObj["red"]=rgbled.getRed
-    rgbObj["green"]=rgbled.getGreen
-    rgbObj["blue"]=rgbled.getBlue
-    rgbObj["status"]=rgbled.getStatus
-    rgbObj["lux"]=luxSensor.getLux()
-
-    finalize=int(time.time())
-    delta=finalize-init
-    print("Time taken:"+str(delta))
-
-    return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
+    objects = updateObj()
+    return template("www/index.tpl", rgb=objects[3], area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
 
 @route("/saveConfig", method="POST")
 def writeConfig():
@@ -132,6 +105,32 @@ def camFeed():
 @route("/camTest")
 def camTest():
     return "<img src='/camFeed'>"
+
+def updateObj():
+    configObj = {}
+    configObj["lat"] = config.getLat
+    configObj["long"] = config.getLong
+
+    updateRoom()
+    tempObj = {}
+    tempObj["target"]= therm.getTarget
+    tempObj["roomTemp"] = therm.getRoomTemp
+    tempObj["roomPressure"] = therm.getRoomPressure
+    tempObj["roomHumidity"] = therm.getRoomHumidity
+    tempObj["heating"] = therm.getHeatingStatus
+
+    lcdScreenObj = {}
+    lcdScreenObj["firstLine"] = lcd.getLine1
+    lcdScreenObj["secondLine"] = lcd.getLine2
+
+    rgbObj = {}
+    rgbObj["red"]=rgbled.getRed
+    rgbObj["green"]=rgbled.getGreen
+    rgbObj["blue"]=rgbled.getBlue
+    rgbObj["status"]=rgbled.getStatus
+    rgbObj["lux"]=luxSensor.getLux()
+
+    return [configObj, tempObj, lcdScreenObj, rgbObj]
 
 def checkLatLong(lat, long):
     try:
