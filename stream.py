@@ -6,7 +6,7 @@ class Stream():
 
     def getData(self):
         with picamera.PiCamera() as camera:
-            im = open("image", "w+")
+            im = open("image", "w+b")
             camera.resolution=(640,480)
             camera.capture(im, format="jpeg")
             return im.read()
