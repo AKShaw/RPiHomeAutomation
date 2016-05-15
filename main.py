@@ -2,6 +2,10 @@
 #   bottle
 #   pyowm
 #   sensehat
+#   jquery
+#   bootstrap
+#   cherrypy
+#   picamera
 
 #Special imports
 from bottle import *
@@ -210,7 +214,7 @@ def start():
     setConfig()
     updateRoom()
     print("Starting server...")
-    run(host='0.0.0.0', port=8080, threaded=True)
+    run(host='0.0.0.0', port=8080, server="cherrypy")
     print("All started")
 
 start()
