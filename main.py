@@ -34,7 +34,7 @@ lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
-stream = Stream()
+camStream = Stream()
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 #Initilize config class
@@ -139,6 +139,11 @@ def setLEDs():
     rgbled.updateLight(red, green, blue, status)
     redirect("/Lighting")
 
+@route("/camFeed")
+def camFeed():
+    im = camStream.getData()
+    return im
+
 def checkLatLong(lat, long):
     try:
         if (-90 <= float(lat) <= 90 and -180 <= float(long) <= 180):
@@ -200,9 +205,6 @@ def updateRoom():
 def start():
     setConfig()
     updateRoom()
-    print("Starting stream...")
-    streamThread = threading.Thread(target=stream.stream, name="Camera stream", args=())
-    streamThread.start()
     print("Starting server...")
     run(host='0.0.0.0', port=8080, threaded=True)
     print("All started")
