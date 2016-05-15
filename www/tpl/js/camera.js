@@ -4,5 +4,5 @@ $( document ).ready(function() {
 		$(".camera").remove();
 		var time = Date.now() / 1000 | 0;
 		camContain.append("<img class='camera' src='/camFeed?i="+time+"'>");
-	}, 1000);
+	}, 4000);
 });
