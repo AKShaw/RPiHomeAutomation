@@ -146,8 +146,7 @@ def camFeed():
 
 @route("/camTest")
 def camTest():
-    im = camStream.getData()
-    return "<img src='"+im+"'>"
+    return "<img src='/camFeed'>"
 
 def checkLatLong(lat, long):
     try:
