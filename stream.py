@@ -6,12 +6,23 @@ class Stream():
 
     def getData(self):
         with picamera.PiCamera() as camera:
-            with open("image", "w+") as im:
-                #camera.resolution=(640,480)
-                #camera.capture(im, format="jpeg")
-                im.write("test")
+            with IM()as im:
+                camera.resolution=(640,480)
+                camera.capture(im, format="jpeg")
                 print("Printing image file...")
-                print (im.read())
                 return im.read()
+
+class IM:
+    def __init__(self):
+        self.file = bytes()
+
+    @property
+    def write(self, data):
+        self.file = data
+
+    def read(self):
+        return self.file
+
+    
             
         
