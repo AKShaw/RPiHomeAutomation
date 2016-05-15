@@ -3,5 +3,5 @@ $( document ).ready(function() {
 	setInterval(function() {
 		$(".camera").remove()
 		camContain.append("<img class=\"camera\" src=\"/camFeed\">")
-	}, 5000);
+	}, 1000);
 });
