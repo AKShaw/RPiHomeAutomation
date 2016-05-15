@@ -34,6 +34,7 @@ from stream import Stream
 
 board = Board()
 sense = SenseHat()
+config = GetConfig()
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
@@ -41,42 +42,18 @@ luxSensor = PhotoResistor(22, board)
 camStream = Stream()
 #pirbuzz = PirBuzzer(board, 5, 6)
 
-#Initilize config class
-def setConfig():
-    global config
-    config = GetConfig()
 
 #Set static path for files
-if (platform.system() == "Windows"):
-    #obviosuly Windows wont work for the GPIO inputs, just for testing template files and general non-linux
-    #constrained stuff etc
-    print("Running on Windows...")
-    @route("/static/<filepath:path>")
-    def server_static(filepath):
-        return static_file(filepath, root='C:/Users/ashaw/RPiHomeAutomation/www')
+@route("/static/<filepath:path>")
+def server_static(filepath):
+    return static_file(filepath, root='/home/pi/RPiHomeAutomation/www')
     print("Static path set!")
-elif (platform.system() == "Linux"):
-    try:
-        import RPi.GPIO as GPIO
-        print("Running on Raspberry Pi...")
-        @route("/static/<filepath:path>")
-        def server_static(filepath):
-            return static_file(filepath, root='/home/pi/RPiHomeAutomation/www')
-        print("Static path set!")
-    except ImportError:	
-        print("Running on Linux...")
-        @route("/static/<filepath:path>")
-        def server_static(filepath):
-            return static_file(filepath, root='/home/alex/RPiHomeAutomation/www')
-        print("Static path set!")
-else:	
-    print("Operating system not supported for development! Please use Windows or Linux")
-    sys.exit()
 	
 
 @route('/<area>')
 @route('/')
 def index(area="Home"):
+    init=int(time.time())
     configObj = {}
     configObj["lat"] = config.getLat
     configObj["long"] = config.getLong
@@ -99,6 +76,10 @@ def index(area="Home"):
     rgbObj["blue"]=rgbled.getBlue
     rgbObj["status"]=rgbled.getStatus
     rgbObj["lux"]=luxSensor.getLux()
+
+    finalize=int(time.time())
+    delta=finalize-init
+    print("Time taken:"+str(delta))
 
     return template("www/index.tpl", rgb=rgbObj, area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=configObj, lcd=lcdScreenObj, temp=tempObj)
 
@@ -211,7 +192,6 @@ def updateRoom():
     therm.setRoomPressure(getCurrentRoom()[2])
 
 def start():
-    setConfig()
     updateRoom()
     print("Starting server...")
     run(host='0.0.0.0', port=8080, server="cherrypy")
