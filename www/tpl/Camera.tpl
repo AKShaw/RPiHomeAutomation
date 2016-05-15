@@ -3,7 +3,7 @@
 <div class="col-xs-12 col-md-6">
 <div id="card" class="camContain">
 	<h2 id="title">Camera:</h2>
-	<img class="camera" src="/camFeed?i={{i}}">
+	<img class="camera" src="/camFeed">
 </div>
 </div>
 <div class="col-md-3 col-xs-0">
