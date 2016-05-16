@@ -187,9 +187,9 @@ def getWeatherData(owm, lat, long):
 def checkBtn():
     while True:
         if btnbuzz.getBtn():
-            btnbuzz.buzz_on()
-        else:
             btnbuzz.buzz_off()
+        else:
+            btnbuzz.buzz_on()
 
 def getCurrentRoom():
     return [int(sense.temp), int(sense.humidity), int(sense.get_pressure())]
