@@ -36,29 +36,10 @@
     <paper-header-panel main>
       <paper-toolbar class="main">
         <paper-button id="menuBtn" paper-drawer-toggle><iron-icon icon="menu"></iron-icon></paper-button>
-        %if area:
-		<div flex>{{area}} - Control Panel</div>
-		%else:
 		<div flex>Home - Control Panel</div>
-		%end
       </paper-toolbar>
       <div>
-		<!--%if area=="Home" or area=="":
-		%	include("www/tpl/Home.tpl")
-		%elif area=="Lighting":
-		%	include("www/tpl/Lighting.tpl")
-		%elif area=="Thermostat":
-		%	include("www/tpl/Thermostat.tpl")
-		%elif area=="Camera":
-		%	include("www/tpl/Camera.tpl")
-		%elif area=="LCDScreen":
-		%	include("www/tpl/LCDScreen.tpl")
-		%elif area=="Config":
-		%	include("www/tpl/Config.tpl")
-		%elif area=="About":
-		%	include("www/tpl/About.tpl")
-		%end-->
-		<iframe class="frame" src=""></iframe>
+		<iframe class="frame" src="/home"></iframe>
       </div>
     </paper-header-panel>
     

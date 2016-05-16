@@ -50,11 +50,15 @@ def server_static(filepath):
     print("Static path set!")
 	
 
-@route('/<area>')
 @route('/')
-def index(area="Home"):
+def index():
     objects = updateObj()
-    return template("www/index.tpl", rgb=objects[3], area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
+    return template("www/index.tpl", rgb=objects[3], weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
+
+@route("/home")
+def home():
+    objects = updateObj()
+    return template("www/tpl/Home.tpl", rgb=objects[3], area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
 
 @route("/lighting")
 def lighting():
