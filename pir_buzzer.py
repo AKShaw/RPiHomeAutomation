@@ -5,9 +5,12 @@ class PirBuzzer:
         self.board = board
         self.pir_pin = pir_pin
         self.buzz_pin = buzz_pin
-        self.board.GPIO.setup(pir_pin, board.GPIO.IN)
-        self.board.GPIO.setup(buzz_pin, board.GPIO.OUT)
+        self.setup()
         self.board.GPIO.add_event_detect(pir_pin, board.GPIO.FALLING, callback=self.buzz, bouncetime=300)
+
+    def setup(self):
+        self.board.GPIO.setup(self.pir_pin, self.board.GPIO.IN)
+        self.board.GPIO.setup(self.buzz_pin, self.board.GPIO.OUT)
 
     def buzz(self, pin):
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.HIGH)

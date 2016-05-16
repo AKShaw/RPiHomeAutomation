@@ -11,7 +11,6 @@
 from bottle import *
 from sense_hat import SenseHat
 import pyowm
-from datetime import date
 
 #general imports
 import platform
@@ -20,6 +19,7 @@ import os
 import calendar
 import time
 import threading
+from datetime import date
 
 #Imports from classes written by myself
 from config import *
@@ -32,7 +32,7 @@ from thermostat import Thermostat
 from photoresistor import PhotoResistor
 from stream import Stream
 
-
+#Initilize all the required classes and create an instance
 board = Board()
 sense = SenseHat()
 config = GetConfig()
@@ -42,7 +42,7 @@ rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
 camStream = Stream()
 btnbuzz = BtnBuzzer(board, 12, 6)
-#pirbuzz = PirBuzzer(board, 5, 6)
+pirbuzz = PirBuzzer(board, 5, 6)
 
 
 #Set static path for files
@@ -51,7 +51,7 @@ def server_static(filepath):
     return static_file(filepath, root='/home/pi/RPiHomeAutomation/www')
     print("Static path set!")
 	
-
+"""Routing methods"""
 @route('/<area>')
 @route('/')
 def index(area="Home"):
@@ -62,11 +62,8 @@ def index(area="Home"):
 def writeConfig():
     lat=request.forms.get("lat")
     long=request.forms.get("long")
-    valid = checkLatLong(lat, long)
-    if valid==True:
-        print("Saving...")
+    if checkLatLong(lat, long):
         saveConfig = SaveConfig(lat, long)
-        print("Saved!")
         setConfig()
         redirect("/Config")
     elif valid==False:
@@ -104,10 +101,9 @@ def camFeed():
     im = camStream.getData()
     return im
 
-@route("/camTest")
-def camTest():
-    return "<img src='/camFeed'>"
+"""End of routing methods"""
 
+"""Normal methods"""
 def updateObj():
     configObj = {}
     configObj["lat"] = config.getLat
@@ -145,16 +141,13 @@ def checkLatLong(lat, long):
     
 
 def getWeatherData(owm, lat, long):
-    owm = owm
     weather = owm.weather_at_coords(lat, long) #returns observation obj
-    currentDate = date.today()
     date_day_name = calendar.day_name[date.today().weekday()] #get day name
     date_day_num = date.today().day # get day num
     currentDate = [date_day_name, date_day_num] #create date variable
     location = weather.get_location().get_name() #get location name e.g Salisbury
     weather = weather.get_weather() #returns weather obj
     temp = weather.get_temperature(unit="celsius") #returns temp obj
-    icon = weather.get_weather_icon_name()
     minTemp = temp["temp_min"]
     maxTemp = temp["temp_max"]
     currentTemp = temp["temp"]
@@ -191,13 +184,10 @@ def checkBtn():
         else:
             btnbuzz.buzz_on()
 
-def getCurrentRoom():
-    return [int(sense.temp), int(sense.humidity), int(sense.get_pressure())]
-
 def updateRoom():
-    therm.setRoomTemp(getCurrentRoom()[0])
-    therm.setRoomHumidity(getCurrentRoom()[1])
-    therm.setRoomPressure(getCurrentRoom()[2])
+    therm.setRoomTemp(int(sense.temp))
+    therm.setRoomHumidity(int(sense.humidity))
+    therm.setRoomPressure(int(sense.get_pressure()))
 
 def start():
     updateRoom()
@@ -209,5 +199,3 @@ def start():
     print("All started")
 
 start()
-
-#TODO: Write LED class, add setLEDs method into here that gets data and sets lights etc

@@ -11,7 +11,7 @@ class Thermostat():
         return self.target
 
     def setTarget(self, value):
-        self.updateHeating(self.roomTemp, value)
+        self.updateHeating()
         self.target = value
 
     @property
@@ -33,15 +33,15 @@ class Thermostat():
         return self.roomTemp
 
     def setRoomTemp(self, value):
-        self.updateHeating(value, self.target)
+        self.updateHeating()
         self.roomTemp = value
 
     @property
     def getHeatingStatus(self):
         return self.heatingStatus
 
-    def updateHeating(self, room, target):
-        if (room >= target):
+    def updateHeating(self):
+        if (self.room >= self.target):
             self.heatingStatus = "OFF"
-        elif (room < target):
+        elif (self.room < self.target):
             self.heatingStatus = "ON"
