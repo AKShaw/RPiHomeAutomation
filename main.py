@@ -27,6 +27,7 @@ from board import Board
 from lcd import SetLCD
 from led import RGBLED
 from pir_buzzer import PirBuzzer
+from btn_buzzer import BtnBuzzer
 from thermostat import Thermostat
 from photoresistor import PhotoResistor
 from stream import Stream
@@ -40,6 +41,7 @@ therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
 camStream = Stream()
+btnbuzz = BtnBuzzer(board, 12, 6)
 #pirbuzz = PirBuzzer(board, 5, 6)
 
 
