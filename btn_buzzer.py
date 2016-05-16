@@ -6,6 +6,7 @@ class BtnBuzzer:
         self.btn_pin = btn_pin
         self.buzz_pin = buzz_pin
         self.setup()
+        print("Pins set up")
 
     def setup(self):
         self.board.GPIO.setup(self.btn_pin, self.board.GPIO.IN, pull_up_down=self.board.GPIO.PUD_UP)

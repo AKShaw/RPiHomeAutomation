@@ -201,6 +201,9 @@ def updateRoom():
 
 def start():
     updateRoom()
+    print("Starting button thread...")
+    t = threading.Thread(target=checkBtn)
+    t.start()
     print("Starting server...")
     run(host='0.0.0.0', port=8080, server="cherrypy")
     print("All started")
