@@ -43,7 +43,7 @@
 		%end
       </paper-toolbar>
       <div>
-		%if area=="Home" or area=="":
+		<!--%if area=="Home" or area=="":
 		%	include("www/tpl/Home.tpl")
 		%elif area=="Lighting":
 		%	include("www/tpl/Lighting.tpl")
@@ -57,7 +57,8 @@
 		%	include("www/tpl/Config.tpl")
 		%elif area=="About":
 		%	include("www/tpl/About.tpl")
-		%end
+		%end-->
+		<iframe class="frame" src=""></iframe>
       </div>
     </paper-header-panel>
     
@@ -67,10 +68,10 @@
       </paper-toolbar>
       <a class="blank" href="Home"><paper-item><iron-icon class="padRight" icon="home"></iron-icon>Home</paper-item></a>
       <hr width="100%">
-      <a class="blank" href="Lighting"><paper-item><iron-icon class="padRight" icon="lightbulb-outline"></iron-icon>Lighting</paper-item></a>
-      <a class="blank" href="Thermostat"><paper-item><iron-icon class="padRight" icon="places:ac-unit"></iron-icon>Thermostat</paper-item></a>
-      <a class="blank" href="Camera"><paper-item><iron-icon class="padRight" icon="image:camera-alt"></iron-icon>Camera</paper-item></a>
-      <a class="blank" href="LCDScreen"><paper-item><iron-icon class="padRight" icon="check-box-outline-blank"></iron-icon>LCD Screen</paper-item></a>
+      <a class="blank" onclick="changeFrame('lighting')" href=""><paper-item><iron-icon class="padRight" icon="lightbulb-outline"></iron-icon>Lighting</paper-item></a>
+      <a class="blank" href=""><paper-item><iron-icon class="padRight" icon="places:ac-unit"></iron-icon>Thermostat</paper-item></a>
+      <a class="blank" href=""><paper-item><iron-icon class="padRight" icon="image:camera-alt"></iron-icon>Camera</paper-item></a>
+      <a class="blank" href=""><paper-item><iron-icon class="padRight" icon="check-box-outline-blank"></iron-icon>LCD Screen</paper-item></a>
       <hr width="100%">
 	  <a class="blank" href="Config"><paper-item><iron-icon class="padRight" icon="build"></iron-icon>Configuration</paper-item</a>
       <a class="blank" href="About"><paper-item><iron-icon class="padRight" icon="help-outline"></iron-icon>About</paper-item</a>
@@ -78,6 +79,6 @@
   
   </paper-drawer-panel>
   <script src="/static/tpl/js/lighting.js"></script>
-  <!--<script src="/static/tpl/js/camera.js"></script>-->
+  <script src="/static/tpl/js/load.js"></script>
 </body>
 </html>
