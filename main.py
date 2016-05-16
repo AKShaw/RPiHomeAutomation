@@ -58,12 +58,12 @@ def index():
 @route("/home")
 def home():
     objects = updateObj()
-    return template("www/tpl/Home.tpl", rgb=objects[3], area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
+    return template("www/tpl/Home.tpl", rgb=objects[3], weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
 
 @route("/lighting")
 def lighting():
     objects = updateObj()
-    return template("www/tpl/Lighting.tpl", rgb=objects[3], area=area, weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
+    return template("www/tpl/Lighting.tpl", rgb=objects[3], weather=getWeatherData(pyowm.OWM("18c319fbdc2695c31d05763b053e1753"), float(config.getLat), float(config.getLong)), config=objects[0], lcd=objects[2], temp=objects[1])
 
 @route("/saveConfig", method="POST")
 def writeConfig():
