@@ -184,6 +184,13 @@ def getWeatherData(owm, lat, long):
    
     return weather
 
+def checkBtn():
+    while True:
+        if btnbuzz.getBtn():
+            btnbuzz.buzz_on()
+        else:
+            btnbuzz.buzz_off()
+
 def getCurrentRoom():
     return [int(sense.temp), int(sense.humidity), int(sense.get_pressure())]
 

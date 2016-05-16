@@ -5,12 +5,17 @@ class BtnBuzzer:
         self.board = board
         self.btn_pin = btn_pin
         self.buzz_pin = buzz_pin
-        self.board.GPIO.setup(btn_pin, board.GPIO.IN)
-        self.board.GPIO.setup(buzz_pin, board.GPIO.OUT)
-        self.board.GPIO.add_event_detect(btn_pin, board.GPIO.FALLING, callback=self.buzz, bouncetime=500)
 
-    def buzz(self, pin):
+    def setup(self):
+        self.board.GPIO.setup(self.btn_pin, self.board.GPIO.IN, pull_up_down=self.board.GPIO.PUD_UP)
+        self.board.GPIO.setup(self.buzz_pin, self.board.GPIO.OUT)
+
+    def buzz_on(self):
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.HIGH)
-        time.sleep(0.5)
+
+    def buzz_off(self):
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.LOW)
+
+    def getBtn(self):
+        return self.board.GPIO.input(self.btn_pin)
         
