@@ -41,7 +41,7 @@ class Thermostat():
         return self.heatingStatus
 
     def updateHeating(self):
-        if (self.room >= self.target):
+        if (self.roomTemp >= self.target):
             self.heatingStatus = "OFF"
-        elif (self.room < self.target):
+        elif (self.roomTemp < self.target):
             self.heatingStatus = "ON"
