@@ -172,7 +172,6 @@ def getWeatherData(owm, lat, long):
     weather["humidity"] = humidity
     weather["windSpeed"] = windSpeed
     weather["status"] = status
-    weather["icon"] = icon
     weather["color"] = color
    
     return weather
