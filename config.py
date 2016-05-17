@@ -5,7 +5,7 @@ class GetConfig():
         self.long=self.findCoords(self.lines)[1]
                             
     def loadConfigFile(self):
-        f = open("config", "r")
+        f = open("config.txt", "r")
         lines=f.readlines()
         f.close()
         return lines
@@ -31,7 +31,7 @@ class SaveConfig():
         self.createData(lat, long)
 
     def writeConfigFile(self, data):
-        f = open("config", "w")
+        f = open("config.txt", "w")
         f.write(data)
         print("Data wrote")
         f.close()
