@@ -27,15 +27,18 @@ class GetConfig():
 
 class SaveConfig():
     def __init__(self, lat, long):
+        print("Saving config")
         self.createData(lat, long)
 
     def writeConfigFile(self, data):
         f = open("config", "w")
         f.write(data)
+        print("Data wrote")
         f.close()
 
     def createData(self, lat, long):
         data = "lat="+str(lat)+"\nlong="+str(long)
+        print("Writing Data")
         self.writeConfigFile(data)
         
 
