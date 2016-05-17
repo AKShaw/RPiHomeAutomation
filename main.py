@@ -64,7 +64,6 @@ def writeConfig():
     long=request.forms.get("long")
     if checkLatLong(lat, long):
         saveConfig = SaveConfig(lat, long)
-        setConfig()
         redirect("/Config")
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
