@@ -63,10 +63,8 @@ def writeConfig():
     lat=request.forms.get("lat")
     long=request.forms.get("long")
     if checkLatLong(lat, long):
-        print("Lat:"+lat)
         saveConfig = SaveConfig(lat, long)
         config = GetConfig()
-        print("lat"+str(GetConfig.getLat))
         redirect("/Config")
     elif checkLatLong(lat, long)==False:
         return "<p>Latitude or Longtitude invalid!</p>"
