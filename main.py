@@ -68,7 +68,7 @@ def writeConfig():
         config = GetConfig()
         print("lat"+GetConfig.getLat)
         redirect("/Config")
-    elif checkLatLong(lat, long)=False:
+    elif checkLatLong(lat, long)==False:
         return "<p>Latitude or Longtitude invalid!</p>"
 
 @route("/setLCDScreen", method="POST")
