@@ -10,6 +10,7 @@ class PirBuzzer:
         self.board.GPIO.add_event_detect(pir_pin, board.GPIO.FALLING, callback=self.buzz, bouncetime=300)
 
     def buzz(self, pin):
+        print("PIR Detetced")
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.HIGH)
         time.sleep(0.1)
         self.board.GPIO.output(self.buzz_pin, self.board.GPIO.LOW)
