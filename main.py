@@ -62,11 +62,12 @@ def index(area="Home"):
 def writeConfig():
     lat=request.forms.get("lat")
     long=request.forms.get("long")
-    if checkLatLong(lat, long):
+    valid = checkLatLong(lat, long)
+    if valid==True:
         saveConfig = SaveConfig(lat, long)
-        config = GetConfig()
+        setConfig()
         redirect("/Config")
-    elif checkLatLong(lat, long)==False:
+    elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
 
 @route("/setLCDScreen", method="POST")
