@@ -65,7 +65,7 @@ def writeConfig():
     valid = checkLatLong(lat, long)
     if valid==True:
         saveConfig = SaveConfig(lat, long)
-        setConfig()
+        #broken
         redirect("/Config")
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
