@@ -63,6 +63,7 @@ def writeConfig():
     lat=request.forms.get("lat")
     long=request.forms.get("long")
     if checkLatLong(lat, long):
+        print("Lat:"+lat)
         saveConfig = SaveConfig(lat, long)
         config = GetConfig()
         redirect("/Config")
