@@ -42,7 +42,7 @@ rgbled = RGBLED(128, 128, 128, 1, sense)
 luxSensor = PhotoResistor(22, board)
 camStream = Stream()
 btnbuzz = BtnBuzzer(board, 12, 6)
-pirbuzz = PirBuzzer(board, 5, 14)
+#pirbuzz = PirBuzzer(board, 5, 14)
 
 
 #Set static path for files
