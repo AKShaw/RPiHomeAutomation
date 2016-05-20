@@ -35,6 +35,7 @@ from stream import Stream
 #Initilize all the required classes and create an instance
 board = Board()
 sense = SenseHat()
+global config
 config = GetConfig()
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
@@ -65,7 +66,7 @@ def writeConfig():
     valid = checkLatLong(lat, long)
     if valid==True:
         saveConfig = SaveConfig(lat, long)
-        #broken
+        config = GetConfig()
         redirect("/Config")
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
