@@ -35,8 +35,6 @@ from stream import Stream
 #Initilize all the required classes and create an instance
 board = Board()
 sense = SenseHat()
-global config
-config = GetConfig()
 lcd = SetLCD("", "", board)
 therm = Thermostat(20, 0, 0, 0, "OFF")
 rgbled = RGBLED(128, 128, 128, 1, sense)
@@ -45,6 +43,10 @@ camStream = Stream()
 btnbuzz = BtnBuzzer(board, 12, 6)
 #pirbuzz = PirBuzzer(board, 5, 14)
 
+#Initilize config
+def initConfig():
+    global config
+    config = GetConfig()
 
 #Set static path for files
 @route("/static/<filepath:path>")
@@ -66,7 +68,7 @@ def writeConfig():
     valid = checkLatLong(lat, long)
     if valid==True:
         saveConfig = SaveConfig(lat, long)
-        config = GetConfig()
+        initConfig()
         redirect("/Config")
     elif valid==False:
         return "<p>Latitude or Longtitude invalid!</p>"
@@ -191,6 +193,7 @@ def updateRoom():
     therm.setRoomPressure(int(sense.get_pressure()))
 
 def start():
+    initConfig()
     updateRoom()
     print("Starting button thread...")
     t = threading.Thread(target=checkBtn)
