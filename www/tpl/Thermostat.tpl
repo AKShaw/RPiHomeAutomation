@@ -7,9 +7,9 @@
 		}
 	</style>
 	<h2 id="title">Thermostat</h2>
-	<h4Current room temp: {{temp["roomTemp"]}}</h3>
+	<h4>Current room temp: {{temp["roomTemp"]}}</h4>
 	<h4>Heating status: {{temp["heating"]}}</h4>
-	<h4>Target Temperature:</h3>
+	<h4>Target Temperature:</h4>
 	<form is="iron-form" action="/setTargetTemp" method="POST">
 		<paper-slider name="targetSlider" pin min="10" max="30" value="{{temp["target"]}}" editable></paper-slider>
 		<paper-button class="col-xs-12" raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); setToast.open();">Set Temp!</paper-button>
