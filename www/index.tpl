@@ -37,9 +37,9 @@
       <paper-toolbar class="main">
         <paper-button id="menuBtn" paper-drawer-toggle><iron-icon icon="menu"></iron-icon></paper-button>
         %if area:
-		<div flex>{{area}} - Control Panel</div>
+		<h3 flex>{{area}} - Control Panel</h3>
 		%else:
-		<div flex>Home - Control Panel</div>
+		<h3 flex>Home - Control Panel</h3>
 		%end
       </paper-toolbar>
       <div>
@@ -63,7 +63,7 @@
     
     <paper-header-panel drawer id="drawer">
       <paper-toolbar class="drawer">
-        <div flex>Navigation</div>
+        <h3 flex>Navigation</h3>
       </paper-toolbar>
       <a class="blank" href="Home"><paper-item><iron-icon class="padRight" icon="home"></iron-icon>Home</paper-item></a>
       <hr width="100%">

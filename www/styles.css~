@@ -20,7 +20,7 @@ paper-toolbar.drawer{
 }
 
 a.blank {
-  color: #333;
+  color: #212121;
   text-decoration:none;
   font-family: Roboto, sans-serif;
 }
