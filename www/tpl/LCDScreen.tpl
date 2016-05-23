@@ -10,7 +10,7 @@
 		<paper-button class="col-xs-12" raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); saveToast.open()">Set LCD screen!</paper-button>
 		<paper-toast id="saveToast" text="Screen set!"></paper-toast>
 	</form>
-	<paper-toast duration="0" id="help" text="Enter a string of up too 16 charatcers in either or both of the text boxes. Click the set button and this will display the entered text on the LCD screen.c">
+	<paper-toast duration="0" id="help" text="Enter a string of up too 16 charatcers in either or both of the text boxes. Click the set button and this will display the entered text on the LCD screen.">
 		<paper-icon-button icon="close" class="closeBtn" onclick="help.toggle()">
 	</paper-toast>
 </div>

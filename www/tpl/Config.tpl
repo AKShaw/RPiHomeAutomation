@@ -10,7 +10,7 @@
 		<paper-button class="col-xs-12" raised id="submit" onclick="Polymer.dom(event).localTarget.parentElement.submit(); saveToast.open()">Save config!</paper-button>
 		<paper-toast id="saveToast" text="Settings have been saved!"></paper-toast>
 	</form>
-	<paper-toast duration="0" id="help" text="This page is used to control the location of the weather data. FInd your current lattitude and longtitude and enter them in here, and click save. This will update the location, and display the correct weather data.">
+	<paper-toast duration="0" id="help" text="This page is used to control the location of the weather data. Find your current lattitude and longtitude and enter them in here, and click save. This will update the location, and display the correct weather data.">
 		<paper-icon-button icon="close" class="closeBtn" onclick="help.toggle()">
 	</paper-toast>
 </div>
