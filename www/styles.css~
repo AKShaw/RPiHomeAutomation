@@ -75,7 +75,7 @@ paper-button#submit:not([disabled]){
 }
 
 #drawer{
-	background-color:#B6B6B6;
+	background-color:#F5F5F5;
 }
 
 .lcdScreen{
@@ -96,4 +96,10 @@ h3#lcd{
 .camera{
 	width:100%;
 	margin:auto;
+}
+
+.help{
+	position:absolute;
+	top:0.5em;
+	right:0.5em;
 }
