@@ -4,6 +4,7 @@ from time import sleep
 class Board:
     
     def __init__(self):
+        """Set up the GPIO board"""
         self.GPIO = RPi.GPIO
         self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setwarnings(False)

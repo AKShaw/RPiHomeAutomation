@@ -1,4 +1,5 @@
 class Thermostat():
+    """This class stores the temp, target temp, humidity, pressure and heating status"""
     def __init__(self, target, roomTemp, roomHumidity, roomPressure, heatingStatus):
         self.target=target
         self.roomTemp=roomTemp
@@ -41,6 +42,7 @@ class Thermostat():
         return self.heatingStatus
 
     def updateHeating(self):
+        """This method decides if the heating should be on or off, dependent on the room temp and target temp"""
         if (self.roomTemp >= self.target):
             self.heatingStatus = "OFF"
         elif (self.roomTemp < self.target):

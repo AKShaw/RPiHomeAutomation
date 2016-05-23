@@ -33,6 +33,7 @@ from photoresistor import PhotoResistor
 from stream import Stream
 
 #Initilize all the required classes and create an instance
+"""Setting up all of the instances of classes, this is an example of OOP"""
 board = Board()
 sense = SenseHat()
 lcd = SetLCD("", "", board)
@@ -55,6 +56,7 @@ def server_static(filepath):
     print("Static path set!")
 	
 """Routing methods"""
+"""These are all event driven as they are only ran when the server receives a request for the routes"""
 @route('/<area>')
 @route('/')
 def index(area="Home"):
@@ -63,6 +65,7 @@ def index(area="Home"):
 
 @route("/saveConfig", method="POST")
 def writeConfig():
+    """This gets the lat/long and calls the instance of the writing class"""
     lat=request.forms.get("lat")
     long=request.forms.get("long")
     valid = checkLatLong(lat, long)
@@ -75,6 +78,7 @@ def writeConfig():
 
 @route("/setLCDScreen", method="POST")
 def setLCDScreen():
+    """This gets the lines and sets the text on the LCD through the lcd instance (OOP)"""
     firstLine = request.forms.get("line1")
     secondLine = request.forms.get("line2")
     lcd.setLine1(firstLine)
@@ -83,12 +87,15 @@ def setLCDScreen():
 
 @route("/setTargetTemp", method="POST")
 def setTargetTemp():
+    """This gets the target temp from the slider, and sets the target property of the therm instance to it. This is an example of OOP"""
     target = request.forms.get("targetSlider")
     therm.setTarget(float(target))
     redirect("/Temperature")
 
 @route("/setLEDs", method="POST")
 def setLEDs():
+    """This gets the RGB values and the status of the LED panel from the web interface, before setting
+    the propertys (OOP) and running the updateLight method which actually sets the new values"""
     red = int(request.forms.get("redSlider"))
     green = int(request.forms.get("greenSlider"))
     blue = int(request.forms.get("blueSlider"))
@@ -102,6 +109,7 @@ def setLEDs():
 
 @route("/camFeed")
 def camFeed():
+    """This gets the image from the getData method of the camStream instance (OOP)"""
     im = camStream.getData()
     return im
 
@@ -109,6 +117,10 @@ def camFeed():
 
 """Normal methods"""
 def updateObj():
+    """This method is responsable for updating all the sensor information.
+    This is ran every time a new page is requested from the server (Event driven) and this makes sure
+    the data displayed on the web interface is always up to date (with the last refresh/page load).
+    This method creates a blank array before populating it directly from the instance properties."""
     configObj = {}
     configObj["lat"] = config.getLat
     configObj["long"] = config.getLong
@@ -135,6 +147,8 @@ def updateObj():
     return [configObj, tempObj, lcdScreenObj, rgbObj]
 
 def checkLatLong(lat, long):
+    """This checks the lattitude and longtidude are valid, which prevents my weather
+    API calls returning an error and breaking the program."""
     try:
         if (-90 <= float(lat) <= 90 and -180 <= float(long) <= 180):
             return True
@@ -145,6 +159,8 @@ def checkLatLong(lat, long):
     
 
 def getWeatherData(owm, lat, long):
+    """This creates a weather object at the specified lat/long containing date, location, temp,
+    pressure, humidity, windspeed etc."""
     weather = owm.weather_at_coords(lat, long) #returns observation obj
     date_day_name = calendar.day_name[date.today().weekday()] #get day name
     date_day_num = date.today().day # get day num
@@ -181,6 +197,8 @@ def getWeatherData(owm, lat, long):
     return weather
 
 def checkBtn():
+    """This is ran in a thread and is constantly checking if the button is pressed.
+    If it is pressed, it runs the buzzer on method."""
     while True:
         if btnbuzz.getBtn():
             btnbuzz.buzz_off()
@@ -188,11 +206,15 @@ def checkBtn():
             btnbuzz.buzz_on()
 
 def updateRoom():
+    """This method gets the data from the sensehat and sets the propertys of the therm
+    instance to them."""
     therm.setRoomTemp(int(sense.temp))
     therm.setRoomHumidity(int(sense.humidity))
     therm.setRoomPressure(int(sense.get_pressure()))
 
 def start():
+    """This method starts the whole program. It creates the global config variable, updates the room,
+    starts the button/buzzer thread and starts the server."""
     initConfig()
     updateRoom()
     print("Starting button thread...")

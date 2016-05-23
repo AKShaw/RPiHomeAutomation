@@ -1,4 +1,6 @@
 class RGBLED():
+    """This class stores all the RGB values, as well as the sensehat
+    object and an on/off status for the LED matrix"""
     def __init__(self, red, green, blue, status, sense):
         self.red = red
         self.green = green
@@ -36,6 +38,7 @@ class RGBLED():
         self.status = value
 
     def updateLight(self, red, green, blue, status):
+        """This method creates an array i=of the RGB values. If the light is turned on, it sets the color to this RGB array. If not it sets the color to black (off)"""
         rgb = [red, green, blue]
         if status==1:
             self.sense.clear(rgb)
