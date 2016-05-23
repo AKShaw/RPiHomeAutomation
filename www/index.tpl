@@ -26,7 +26,7 @@
   <link rel="import" href="/static/bower_components/paper-toast/paper-toast.html">
   <link rel="import" href="/static/bower_components/paper-slider/paper-slider.html">
   <link rel="import" href="/static/bower_components/paper-toggle-button/paper-toggle-button.html">
-  <link rel="import" href="/static/bower_components/paper-icon-button/paper-button-icon.html">
+  <link rel="import" href="/static/bower_components/paper-icon-button/paper-icon-button.html">
   <link rel="stylesheet" href="/static/styles.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
