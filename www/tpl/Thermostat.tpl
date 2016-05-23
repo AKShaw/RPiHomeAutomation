@@ -1,6 +1,5 @@
 <div class="col-xs-0 col-md-3"></div>
-<div class="col-xs-12 col-md-6">
-<div id="card">
+<div id="card" class="col-xs-12 col-md-6">
 	<style is="custom-style">
 		paper-slider {
 			width: 100%;
@@ -19,6 +18,5 @@
 	<paper-toast duration="0" id="help" text="Set the target temp using the slider then click the set button. If the current room temperature is lower, the heating will be turned on.">
 		<paper-icon-button icon="close" class="closeBtn" onclick="help.toggle()">
 	</paper-toast>
-</div>
 </div>
 <div class="col-xs-0 col-md-3"></div>

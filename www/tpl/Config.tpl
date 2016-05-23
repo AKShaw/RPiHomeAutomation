@@ -1,6 +1,6 @@
 <div class="col-xs-12">
 <div class="col-xs-0 col-md-3"></div>
-<div id="card" class="col-xs-12 col-md-6"style="margin-left:auto; margin-right:auto;">
+<div id="card" class="col-xs-12 col-md-6">
 	<paper-icon-button icon="help" class="help" onclick="help.open()"></paper-icon-button>
 	<h2 class="title">Configuration</h2>
 	<form is="iron-form" action="/saveConfig" method="POST">
