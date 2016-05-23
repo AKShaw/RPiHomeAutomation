@@ -1,7 +1,7 @@
 <div class="col-xs-0 col-md-3">
 </div>
 <div id="card" class="col-xs-12 col-md-6">
-	<paper-icon-button icon="help" class="help" onclick=""></paper-icon-button>
+	<paper-icon-button icon="help" class="help" onclick="help.open()"></paper-icon-button>
 	<h2 id="title">Lighting</h2>
 	<style is="custom-style">
 		paper-slider#red { --paper-slider-knob-color: var(--paper-red-500); --paper-slider-active-color: var(--paper-red-500);}
