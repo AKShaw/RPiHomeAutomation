@@ -6,6 +6,7 @@
 #   bootstrap
 #   cherrypy
 #   picamera
+#   test
 
 #Special imports
 from bottle import *
